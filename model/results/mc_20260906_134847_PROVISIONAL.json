@@ -1,0 +1,90 @@
+{
+ "run_at": "2026-09-06T13:48:47",
+ "seed": 42,
+ "iterations": 20000,
+ "input_status": {
+  "hourly_rate_eur": "LOCKED",
+  "estimators_branch": "LOCKED",
+  "productive_hours_yr": "LOCKED",
+  "inquiries_per_month": "LOCKED",
+  "touch_hours_tier": "LOCKED",
+  "cost_per_quote_tier": "LOCKED",
+  "tier_volume_shares": "LOCKED",
+  "tier_value_shares": "LOCKED",
+  "win_rate_tier": "LOCKED",
+  "margin_tier": "LOCKED",
+  "quality_cost_pct": "LOCKED",
+  "discount_leakage_pct": "LOCKED",
+  "build_cost_eur": "LOCKED",
+  "discount_rate": "LOCKED",
+  "hurdle_rate": "LOCKED",
+  "horizon_years": "LOCKED",
+  "automation_rate": "PROVISIONAL",
+  "win_uplift_pp": "PROVISIONAL",
+  "build_overrun": "PROVISIONAL",
+  "run_cost_yr_eur": "PROVISIONAL",
+  "change_cost_eur": "PROVISIONAL",
+  "pricing_adoption": "PROVISIONAL",
+  "error_reduction_factor": "PROVISIONAL",
+  "revenue_branch_eur": "PROVISIONAL",
+  "scale_factor": "PROVISIONAL",
+  "adoption_ramp": "PROVISIONAL"
+ },
+ "provisional_inputs": [
+  "automation_rate",
+  "win_uplift_pp",
+  "build_overrun",
+  "run_cost_yr_eur",
+  "change_cost_eur",
+  "pricing_adoption",
+  "error_reduction_factor",
+  "revenue_branch_eur",
+  "scale_factor",
+  "adoption_ramp"
+ ],
+ "npv_at_12pct": {
+  "P10": 255975.28956661414,
+  "P50": 396634.4521437248,
+  "P90": 491762.3283678676
+ },
+ "prob_clearing_15pct_hurdle": 1.0,
+ "irr_median": 0.9540520776722181,
+ "payback_median_years": 1.2888212779542454,
+ "tornado_npv_ranges": {
+  "automation_rate": [
+   335193.5538487221,
+   448366.5519285585
+  ],
+  "win_uplift_pp": [
+   170995.45684024645,
+   722956.9469612313
+  ],
+  "build_overrun": [
+   368780.0528886403,
+   396380.0528886403
+  ],
+  "run_cost": [
+   366546.6194722253,
+   409803.93390036526
+  ],
+  "change_cost": [
+   379780.0528886403,
+   399780.0528886403
+  ],
+  "pricing_adoption": [
+   305175.1492340526,
+   449516.65532503213
+  ]
+ },
+ "conservative_case": {
+  "npv_at_12pct": 70189.02066035886,
+  "npv_at_15pct_hurdle": 53613.662014242596,
+  "clears_hurdle_on_cost_error_discount_alone": true,
+  "benefits_full_year": {
+   "labour_redeploy": 9104.594400000004,
+   "error_savings": 16500.0,
+   "discount_recovery": 66500.0,
+   "win_uplift": 0.0
+  }
+ }
+}
