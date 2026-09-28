@@ -1,0 +1,58 @@
+{
+  "kind": "pnl",
+  "timestamp": "20260913_145426",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "207a86a",
+  "params_checksum": "677724b41d2a",
+  "npv12_p10_p50_p90": [
+    551844.3758861655,
+    899174.2472244531,
+    1292787.812806211
+  ],
+  "p_clears_hurdle": 1.0,
+  "irr_median": 1.37175111970239,
+  "payback_median_years": 1.1999237419832514,
+  "automation_rate": {
+    "pessimistic": 0.3344844094780218,
+    "central": 0.5464881968279728,
+    "optimistic": 0.6976563349851674
+  },
+  "benefit_medians": {
+    "labour_redeploy": 215267.99536487012,
+    "quality_savings": 36990.769620837134,
+    "win_uplift_margin": 209921.73745494272
+  },
+  "infra_annual_eur": 5248.13064218784,
+  "infra_by_service_eur": {
+    "Aurora PostgreSQL": 2581.8143058,
+    "OpenSearch (vector)": 1482.24884688,
+    "Fargate (web app)": 529.58767464,
+    "Textract (OCR, cross-border)": 420.80878125,
+    "Bedrock (extraction)": 171.637155063,
+    "S3 (documents)": 36.41614453125,
+    "DynamoDB (catalogue)": 14.17328892909,
+    "OpenAI (CAD, external)": 8.157216375,
+    "Step Functions": 2.1364138125000003,
+    "SES (email)": 0.9322533000000001,
+    "Lambda": 0.21856160699999996,
+    "Cognito (auth)": 0.0
+  },
+  "conservative_case": {
+    "npv_at_12pct": 29738.899079018105,
+    "npv_at_hurdle": 13214.181377318258,
+    "clears": true
+  },
+  "conservative_benefits": {
+    "labour_redeploy": 131653.0635705494,
+    "quality_savings": 15701.949753775727,
+    "win_uplift_margin": 0.0
+  },
+  "asis_eng_hours": 24789.273476591272,
+  "tobe_eng_hours": 11242.228113693416,
+  "asis_won_value_eur": 38586341.80421809,
+  "revenue_input_eur": 38500000,
+  "run_cost_central_eur": 65248.13064218784,
+  "build_cost_eur": 93000,
+  "benefit_total_eur": 462180.50244064996
+}

@@ -1,0 +1,94 @@
+{
+  "kind": "stress",
+  "timestamp": "20260913_155821",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "207a86a",
+  "params_checksum": "1aee94c5926e",
+  "scenarios": [
+    {
+      "name": "base_central",
+      "benefits_yr": 467222.7982654931,
+      "npv12": 929624.3206092485,
+      "npv_hurdle": 841448.6774066258
+    },
+    {
+      "name": "adoption_failure",
+      "benefits_yr": 396164.4921587348,
+      "npv12": 734880.6450666197,
+      "npv_hurdle": 662622.1827642666
+    },
+    {
+      "name": "build_overrun_30",
+      "benefits_yr": 467222.7982654931,
+      "npv12": 906374.3206092485,
+      "npv_hurdle": 818198.6774066258
+    },
+    {
+      "name": "build_overrun_60",
+      "benefits_yr": 467222.7982654931,
+      "npv12": 878474.3206092485,
+      "npv_hurdle": 790298.6774066258
+    },
+    {
+      "name": "demand_collapse",
+      "benefits_yr": 430451.5628428517,
+      "npv12": 828848.4094907112,
+      "npv_hurdle": 748909.585292319
+    },
+    {
+      "name": "demand_surge",
+      "benefits_yr": 466669.5893155952,
+      "npv12": 928108.1861817781,
+      "npv_hurdle": 840056.4627207539
+    },
+    {
+      "name": "elasticity_zero",
+      "benefits_yr": 282422.7982654931,
+      "npv12": 423158.10698732035,
+      "npv_hurdle": 376377.97673079174
+    },
+    {
+      "name": "extraction_pessimistic",
+      "benefits_yr": 354054.33961863804,
+      "npv12": 619472.8013868326,
+      "npv_hurdle": 556647.0845641093
+    },
+    {
+      "name": "senior_attrition",
+      "benefits_yr": 450290.0453457043,
+      "npv12": 883218.1125059959,
+      "npv_hurdle": 798835.4346318587
+    }
+  ],
+  "tornado": {
+    "extraction (5.3 range)": [
+      626133.8661569562,
+      1194531.7735675168
+    ],
+    "win uplift (0-5pp)": [
+      423158.10698732035,
+      1689323.6410421408
+    ],
+    "build overrun": [
+      906374.3206092485,
+      934274.3206092485
+    ],
+    "run cost": [
+      920165.1523863703,
+      932462.0710761119
+    ],
+    "change cost": [
+      917624.3206092485,
+      937624.3206092485
+    ]
+  },
+  "kill_criteria": {
+    "win_uplift_pp (below)": null,
+    "extraction weight (below)": null,
+    "build multiplier (above)": null,
+    "run cost EUR/yr (above)": null,
+    "demand multiplier (below)": null
+  },
+  "quality_scale": 1.0
+}

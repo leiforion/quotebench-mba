@@ -1,0 +1,34 @@
+{
+  "kind": "pnl",
+  "timestamp": "20260906_151719",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "e226562",
+  "params_checksum": "4dc3c0191e6a",
+  "npv12_p10_p50_p90": [
+    93943.44037024058,
+    260217.81904932385,
+    456815.8977409062
+  ],
+  "p_clears_hurdle": 0.9845,
+  "irr_median": 0.6903598209085706,
+  "payback_median_years": 1.6276260109005736,
+  "benefit_medians": {
+    "labour_redeploy": 17410.095590023084,
+    "quality_savings": 7518.343975668363,
+    "discount_recovery": 28438.425491915106,
+    "win_uplift_margin": 96109.48945017743
+  },
+  "quality_scale": 2.34359251301453,
+  "conservative_case": {
+    "npv_at_12pct": -82933.75436268674,
+    "npv_at_hurdle": -87676.71330678184,
+    "clears": false
+  },
+  "conservative_benefits": {
+    "labour_redeploy": 10667.332235189308,
+    "quality_savings": 5527.843248210382,
+    "discount_recovery": 25519.673024588967,
+    "win_uplift_margin": 0.0
+  }
+}

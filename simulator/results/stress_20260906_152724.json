@@ -1,0 +1,99 @@
+{
+  "kind": "stress",
+  "timestamp": "20260906_152724",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "a136120",
+  "params_checksum": "4dc3c0191e6a",
+  "scenarios": [
+    {
+      "name": "base_central",
+      "benefits_yr": 140207.95366179768,
+      "npv12": 239363.9959000083,
+      "npv_hurdle": 211493.12139605658
+    },
+    {
+      "name": "adoption_failure",
+      "benefits_yr": 131703.18774371376,
+      "npv12": 213519.9807091143,
+      "npv_hurdle": 187646.17501218844
+    },
+    {
+      "name": "build_overrun_30",
+      "benefits_yr": 140207.95366179768,
+      "npv12": 216363.9959000083,
+      "npv_hurdle": 188493.12139605658
+    },
+    {
+      "name": "build_overrun_60",
+      "benefits_yr": 140207.95366179768,
+      "npv12": 188763.9959000083,
+      "npv_hurdle": 160893.12139605658
+    },
+    {
+      "name": "demand_collapse",
+      "benefits_yr": 85660.976225256,
+      "npv12": 73608.35640735345,
+      "npv_hurdle": 58546.07278118617
+    },
+    {
+      "name": "demand_surge",
+      "benefits_yr": 191964.68635380757,
+      "npv12": 396640.72741817555,
+      "npv_hurdle": 356616.46063884
+    },
+    {
+      "name": "elasticity_zero",
+      "benefits_yr": 54637.928291861215,
+      "npv12": -20663.50595556978,
+      "npv_hurdle": -28441.031609161448
+    },
+    {
+      "name": "extraction_pessimistic",
+      "benefits_yr": 121058.8466387032,
+      "npv12": 181174.2917313596,
+      "npv_hurdle": 157799.96477340287
+    },
+    {
+      "name": "senior_attrition",
+      "benefits_yr": 143819.25573451188,
+      "npv12": 250337.9070605355,
+      "npv_hurdle": 221619.03523465514
+    }
+  ],
+  "tornado": {
+    "extraction (5.3 range)": [
+      188618.4765465727,
+      289871.18330009567
+    ],
+    "win uplift (0-5pp)": [
+      -20663.50595556978,
+      629405.2486833754
+    ],
+    "build overrun": [
+      216363.9959000083,
+      243963.9959000083
+    ],
+    "run cost": [
+      214130.56248359324,
+      257387.87691173333
+    ],
+    "pricing adoption": [
+      200618.3651088077,
+      265194.4164274754
+    ],
+    "change cost": [
+      227363.9959000083,
+      247363.9959000083
+    ]
+  },
+  "kill_criteria": {
+    "win_uplift_pp (below)": 0.002370737493038178,
+    "extraction weight (below)": null,
+    "build multiplier (above)": 3.348838299512863,
+    "run cost EUR/yr (above)": 83091.68860316277,
+    "pricing adoption (below)": null,
+    "demand multiplier (below)": 0.503125
+  },
+  "quality_scale": 2.34359251301453
+}

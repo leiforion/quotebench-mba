@@ -1,0 +1,40 @@
+{
+  "kind": "calibration",
+  "timestamp": "20260913_142652",
+  "seed": 42,
+  "years": 12,
+  "git_commit": "207a86a",
+  "params_checksum": "e7e3aac01fd8",
+  "gate": "PASS",
+  "summary": {
+    "cycle_median_wh": {
+      "tier1": 18.012781112292032,
+      "tier2": 39.16136502502036,
+      "tier3": 88.14792194854954
+    },
+    "cycle_p90_wh": {
+      "tier1": 32.42774555683991,
+      "tier2": 71.9416738075297,
+      "tier3": 158.54068744041285
+    },
+    "touch_median_h": {
+      "tier1": 2.004045732661424,
+      "tier2": 5.275990665756348,
+      "tier3": 10.879710474671493
+    },
+    "cost_per_quote_eur": {
+      "tier1": 26.79409144568324,
+      "tier2": 70.53999520116237,
+      "tier3": 145.46172904635785
+    },
+    "annual_inquiries": 5514.583333333333,
+    "utilization": 0.7361422178808156,
+    "pickup_median_wh": 12.219717766656686,
+    "clarified_share": 0.3748394408764639,
+    "queue_share_pct": {
+      "tier1": 88.87431252193561,
+      "tier2": 86.52756189069126,
+      "tier3": 87.65743963763344
+    }
+  }
+}
