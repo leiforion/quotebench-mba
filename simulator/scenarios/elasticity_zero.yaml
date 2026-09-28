@@ -1,0 +1,5 @@
+name: elasticity_zero
+description: "Speed buys no additional wins (9.3 floor): the single most
+  attackable assumption removed entirely."
+reuse_base_anchors: true
+win_uplift_pp: 0.0

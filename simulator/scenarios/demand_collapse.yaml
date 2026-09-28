@@ -1,0 +1,5 @@
+name: demand_collapse
+description: "Arrivals -40%: construction downturn. The build cost stays fixed
+  while every volume-linked benefit shrinks; the kill-criteria finder locates
+  the exact volume boundary."
+arrivals_multiplier: 0.6

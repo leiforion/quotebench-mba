@@ -1,0 +1,6 @@
+name: adoption_failure
+description: "Engineers reject the automation: auto-draft never trusted
+  (release path disabled) and the workspace assist credit halves. The system
+  becomes an expensive pre-filler."
+disable_auto: true
+assist_credit_multiplier: 0.5

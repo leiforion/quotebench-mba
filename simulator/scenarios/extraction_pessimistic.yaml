@@ -1,0 +1,4 @@
+name: extraction_pessimistic
+description: "Documents land at the pessimistic end of the published 5.3
+  ranges: heavy manual routing, minimal automation benefit."
+variant: pessimistic
