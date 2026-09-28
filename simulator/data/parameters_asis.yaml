@@ -1,0 +1,79 @@
+# As-is parameters. Every value cites its register row (model/assumptions.csv).
+# (M) measured, (E) estimated per the paper's tagging. This file is hand-written
+# and never modified by code; fitted values live in data/fitted_asis.yaml,
+# written by `python -m sim fit`.
+
+clock:
+  working_hours_per_day: 8
+  working_days_per_month: 22   # => 176 working hours (wh) per month
+
+arrivals_per_month:            # company-wide (D-COMPANY, 13 Sep): branch
+  tier1: 251                   # BASE-14 (29/18/6) scaled x8.648 to reach
+  tier2: 156                   # ~5,500 inquiries/yr across 16 estimators,
+  tier3: 52                    # preserving the measured 55/33/12 tier mix
+
+touch_median_h:                # BASE-17 (M)
+  tier1: 2.1
+  tier2: 5.5
+  tier3: 11.4
+touch_sigma: 0.40              # spread of total touch around its median (E)
+touch_split:                   # share of touch by phase (E, observation notes)
+  reading: 0.35
+  calc_select: 0.45
+  assembly: 0.20
+
+notice_delay:                  # mailbox/batching before anyone engages (E).
+  median_wh: 12.0              # Together with the emergent desk queue this must
+  sigma: 0.55                  # reproduce BASE-23 (M): 14 wh median pickup
+                               # (checked as a diagnostic, not imposed).
+
+clarification:
+  probability:                 # weighted to BASE-26 (M): 38% overall need >=1 loop
+    tier1: 0.25                # 0.55*0.25 + 0.33*0.45 + 0.12*0.75 = 0.376
+    tier2: 0.45
+    tier3: 0.75
+  # BASE-24's 41 wh contractor answer is NOT modeled as a separate additive
+  # delay: the measured cycle medians and P90s only reconcile if it overlaps
+  # other waiting (the inquiry parks while the answer comes). Its elapsed cost
+  # is calibrated inside the fitted external wait per tier; to-be scenarios
+  # re-split that wait using BASE-23/24/25 at projection time.
+
+estimators:                    # company-wide = 16 estimators (BASE-02).
+  # Branch profile (1 senior + 1 mid, D14) replicated 8x to keep the same
+  # senior/mid mix and geometric-mean speed ~1 so tier touch medians hold.
+  # Company senior/mid split is a structural assumption (8/8); flagged.
+  - {name: senior_1, skill: senior, speed: 0.88, error_mult: 0.8}
+  - {name: senior_2, skill: senior, speed: 0.88, error_mult: 0.8}
+  - {name: senior_3, skill: senior, speed: 0.88, error_mult: 0.8}
+  - {name: senior_4, skill: senior, speed: 0.88, error_mult: 0.8}
+  - {name: senior_5, skill: senior, speed: 0.88, error_mult: 0.8}
+  - {name: senior_6, skill: senior, speed: 0.88, error_mult: 0.8}
+  - {name: senior_7, skill: senior, speed: 0.88, error_mult: 0.8}
+  - {name: senior_8, skill: senior, speed: 0.88, error_mult: 0.8}
+  - {name: mid_1, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_2, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_3, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_4, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_5, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_6, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_7, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_8, skill: mid, speed: 1.13, error_mult: 1.2}
+
+pump_count_bounds:             # BASE-13 (M)
+  tier1: [1, 2]
+  tier2: [3, 12]
+  tier3: [13, 80]
+preemption_pump_threshold: 40  # large Tier 3 (~monthly) pre-empts (4.5)
+
+hourly_rate_eur: 12.28         # loaded cost AED 96,000 = EUR 22,588 (FX 4.25)
+                               # over 46 working weeks x 40 h = 1,840 h/yr
+
+calibration_targets:           # the SIM-1 gate; tolerance ±10% (tests/)
+  cycle_median_wh: {tier1: 18, tier2: 39, tier3: 88}     # BASE-15 (M)
+  cycle_p90_wh:    {tier1: 34, tier2: 71, tier3: 162}    # BASE-16 (M)
+  touch_median_h:  {tier1: 2.1, tier2: 5.5, tier3: 11.4} # BASE-17 (M)
+  cost_per_quote_eur: {tier1: 26, tier2: 68, tier3: 140} # touch x 12.28
+  queue_share_pct: {low: 84, high: 90}                   # BASE-22 (M) 86-88 ±2
+  annual_inquiries: 5500                                 # company-wide (D-COMPANY)
+  pickup_median_wh: 14                                   # BASE-23 (M), diagnostic
+  clarified_share: 0.38                                  # BASE-26 (M), diagnostic

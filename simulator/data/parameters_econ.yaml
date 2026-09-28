@@ -1,0 +1,81 @@
+# Economics and investment-case parameters (SIM-3). Register citations per
+# row; PROVISIONAL rows await the 9.4 cost model and are flagged exactly as in
+# the retired model/monte_carlo.py harness they absorb. All EUR (GEN-01).
+
+hourly_rate_eur: 12.28         # AED 96,000 = EUR 22,588 (FX 4.25) / 1,840 h
+
+# Company-level anchors (D-COMPANY, 13 Sep). Redeployment is valued on the
+# headcount basis the authors chose: emergent automation-of-touch-time (an
+# OUTPUT of the DES, not the assumed 60%) times the loaded cost of the 16-strong
+# estimator pool. Revenue is a management input used for the win-rate and error
+# benefits.
+company:
+  n_estimators: 16             # BASE-02
+  loaded_cost_eur: 22588       # AED 96,000 at FX 4.25 (BASE-05)
+  revenue_eur: 35294118        # AED 150M at FX 4.25 (BASE-42, whole company)
+  blended_margin: 0.24         # D19 blended gross margin on won work
+  value_scale: 0.11819         # rescales the branch-calibrated value bands so
+                               # simulated won value reproduces company revenue.
+                               # Also carries the AED->EUR FX rebasing (the base
+                               # value bands are EUR@3.9); = 0.1288 x 3.9/4.25.
+                               # (calibrated empirically; see build_anchors)
+
+win_rate:                      # BASE-20 (M)
+  tier1: 0.34
+  tier2: 0.27
+  tier3: 0.22
+margin:                        # BASE-21 (E, D19): measured tier pattern
+  tier1: 0.185                 # (14/17/21, M) rescaled x1.323 so the
+  tier2: 0.225                 # won-value-weighted average reproduces the
+  tier3: 0.278                 # authors' stated 24% gross margin on revenue
+
+# NOTE: the business does not offer discounts (author, 13 Sep). There is no
+# discount-leakage pool and no pricing-recovery benefit anywhere in the model,
+# so the former `discounts` block and `pricing_adoption_triangular` lever were
+# removed. Every quote is priced at the like-for-like reference.
+
+error_unit_cost_eur:           # BASE-30 (E, D19): credit-note ledger
+  extraction: 845              # absolutes scaled x6.125 with order value
+  calculation: 2677            # (a defect on a 6x larger order costs
+  selection: 11270             # proportionally more). Replaces the retired
+  pricing: 4508                # BASE-31 1.2%-of-revenue calibration target,
+                               # which was derived against the old (6x low)
+                               # revenue base and cannot survive D19.
+calc_site_failure: {probability: 0.10, cost_eur: 35219}  # BASE-30 tail, x6.125
+# quality_cost_target_pct retired per D19: quality cost is now anchored to
+# the value-scaled unit costs directly (scale = 1.0 in economics.py).
+error_cost_on_won_only: true   # credit notes exist only on orders; rework on
+                               # lost quotes is inside touch time already
+
+win_uplift_pp:                 # response-time elasticity, 9.3: floored at
+  triangular: [0.00, 0.02, 0.05]  # zero, capped by triangulation (15% of
+                               # tenders lost to late quotes is the upper
+                               # bound; 5pp on a 27% base is ~18% relative,
+                               # inside it). PROVISIONAL pending 9.3.
+
+financial:
+  build_cost_eur: 93000        # existing engineer, year 1 of build (author,
+                               # 13 Sep): EUR 93,000
+  build_overrun_triangular: [1.00, 1.05, 1.30]  # +30% tail per 9.5
+  # Run cost is now itemized: the build engineer moves to a maintenance role at
+  # EUR 60,000/yr PLUS the AWS infrastructure total from parameters_infra.yaml
+  # (priced per service, ~EUR 5.2k/yr). run_cost_yr_triangular is derived in
+  # economics.py as maintenance_engineer_eur + infra x infra_mult_triangular.
+  maintenance_engineer_eur: 60000              # author, 13 Sep
+  infra_mult_triangular: [0.85, 1.00, 1.50]    # uncertainty on the AWS lines
+  change_cost_triangular: [10000, 18000, 30000] # PROVISIONAL: 9.4 (training,
+                               # transition productivity dip)
+  adoption_ramp: [0.3, 0.7, 1.0, 1.0, 1.0]      # benefit ramp Y1-Y5 (author,
+                               # 13 Sep): 30% / 70% / full
+  discount_rate: 0.12          # D11: WACC proxy
+  hurdle_rate: 0.15            # D11: approval hurdle
+  horizon_years: 5
+
+monte_carlo:
+  iterations: 20000
+  anchor_seeds: [101, 102, 103]  # DES runs per variant; MC interpolates
+  anchor_years: 6
+  extraction_weight_triangular: [0.0, 0.5, 1.0]  # where on the published 5.3
+                               # spectrum the documents fall: 0 = pessimistic,
+                               # 0.5 = central, 1 = optimistic; the 8.1 audit
+                               # would narrow this

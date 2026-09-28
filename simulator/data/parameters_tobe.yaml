@@ -1,0 +1,162 @@
+# To-be (QuoteBench) parameters. Everything here is S-tagged design projection
+# unless a register row is cited: no live system exists, and extraction
+# performance is seeded from the published ranges discussed in Section 5.3,
+# NOT from any audit (authors' direction 6 Sep, D12). Hand-written; never
+# modified by code. Variants: optimistic / central / pessimistic.
+
+fields_per_system: 12          # Appendix G schema; TOBE-08 compounding applies
+systems_per_inquiry:           # applications per inquiry by tier (Table 4.1)
+  tier1: [1, 1]                # one application
+  tier2: [1, 2]                # up to two
+  tier3: [2, 4]                # multiple systems / buildings
+
+doc_class_mix:                 # tier-conditioned mix; rationale per row.
+  tier1:                       # Replacements and small boosters arrive as short
+    clean_digital: 0.50        # emails or single-page digital sheets; a small
+    scanned: 0.35              # tail is photographed nameplates (scanned) and
+    fragmented: 0.13           # forwarded fragments; CAD essentially never.
+    cad_dependent: 0.02
+  tier2:                       # Single-building packages: consultant extracts
+    clean_digital: 0.30        # (digital), scanned schedules are common,
+    scanned: 0.40              # multi-source fragments frequent; some pump
+    fragmented: 0.22           # rooms exist only on drawings.
+    cad_dependent: 0.08
+  tier3:                       # "Substantially incomplete; drawings required"
+    clean_digital: 0.10        # (Table 4.1): scans and fragments dominate and
+    scanned: 0.30              # a quarter of inquiries carry fields that live
+    fragmented: 0.35           # only in DWG files.
+    cad_dependent: 0.25
+
+extraction_success:            # per-field P(correct), by class and variant.
+  # Seeded from 5.3: strongest pipelines >90% on curated benchmarks
+  # (optimistic end, clean documents); enterprise evaluations degrade sharply
+  # as schemas widen and documents lengthen (pessimistic end, messy classes).
+  clean_digital: {optimistic: 0.97, central: 0.94, pessimistic: 0.90}
+  scanned:       {optimistic: 0.93, central: 0.88, pessimistic: 0.82}
+  fragmented:    {optimistic: 0.88, central: 0.82, pessimistic: 0.74}
+  cad_dependent: {optimistic: 0.88, central: 0.82, pessimistic: 0.74}  # extractable fields only
+cad_locked_fields_per_system: 3  # fields only in DWG: near-zero confidence,
+                                 # flagged, routes to engineer (7.4 boundary)
+
+confidence:                    # confidence model: scores must correlate with
+  correct:                     # correctness for routing to mean anything.
+    eps_beta_a: 1.0            # correct field: conf = 1 - 0.4*Beta(1,15)
+    eps_beta_b: 15.0           # (median ~0.98, P(conf>=0.90) ~ 0.99)
+    eps_scale: 0.4
+  wrong:                       # wrong field: conf = Beta(2.5,2.5)
+    beta_a: 2.5                # (mean 0.5; ~8% land above C2, ~2% above C1 -
+    beta_b: 2.5                # these are the dangerous, confidently-wrong ones)
+  cad_locked_conf: [0.02, 0.20]  # uniform; always flagged
+
+routing:                       # 7.7 routing; parameters, not constants (11.1)
+  C1: 0.90                     # auto-draft floor on minimum field confidence
+  C2: 0.75                     # assisted floor
+  V1_eur: 55125                # value gate: auto-draft only below this
+                               # (D19: scaled x6.125 with the value bands so
+                               # routing shares are preserved)
+  # NOTE: the business does not offer discounts, so auto-drafting is no longer
+  # gated on a discount band (the former p_discount_in_band was removed).
+
+value_bands_eur:               # BASE-12 tier bands; lognormal within band.
+  tier1: {median: 50715,  sigma: 0.55, min: 1840,   max: 56350}
+  tier2: {median: 232033, sigma: 0.60, min: 56350,  max: 493063}
+  tier3: {median: 517716, sigma: 0.65, min: 493063, max: 9800000}
+  # D19 (authors, 6 Sep): actual 2025 branch pump-only revenue ~AED 150M
+  # (~EUR 34.5M won). All value parameters scaled x6.125 from the SIM-3
+  # calibration so the simulated won total reproduces the stated revenue
+  # while BASE-11 value shares (12/41/47) are preserved (scaling is
+  # share-invariant). The D17 trade-price research is superseded as a level
+  # anchor (it sat ~6x below actual order values) and retained only as
+  # relative shape. Bands to be re-measured from the RFQ log (open item).
+  mega:                        # D17 (authors, 6 Sep): >=2 quotes/yr at
+    per_year: 2                # flagship-museum scale (Guggenheim-class:
+    of_tier3_per_year: 72      # ~60-120 pumps; ETS/secondary CHW sets, zone
+    value_range: [4900000, 9187500]  # D19: scaled x6.125 with the bands.
+                               # Megas carry ~22% of tier-3 quoted value.
+
+system_lane_minutes:           # machine time; no queue in front of it
+  intake: 1                    # TOBE-01 [A1]
+  extraction_validation: 12    # TOBE-02 [A2]
+  clarification_issue: 13      # TOBE-03 [A3]: consolidated, minutes not 22 wh
+
+clarification:
+  incidence_as_asis: true      # per-tier probabilities from parameters_asis.yaml;
+                               # the system finds gaps faster, it does not
+                               # remove them (S, conservative)
+  wait_median_wh:              # contractor's answer at its measured pace (C12),
+    tier1: 4                   # tier-conditioned: BASE-24's global 41 wh median
+    tier2: 20                  # is dominated by complex jobs and is additive-
+    tier3: 41                  # incompatible with BASE-15/16 for tiers 1-2
+    # (SIM-1 build notes, simulation_plan.md section 5). Tier 3 keeps the full
+    # measured 41 wh, matching the flagship case's multi-day replies. A quick
+    # question about a model number is answered in half a day; a riser
+    # ambiguity across three buildings is not.
+  sigma: 0.60
+
+review_touch_minutes:          # engineer touch by route (S, process model)
+  auto_release: 5              # one-click release with displayed confidence
+  assisted: {tier1: 12, tier2: 25, tier3: 150}  # tier2 = TOBE-06; tier3 =
+                               # 7.9's Innovo-specific 2.5-3h, pending this sim
+manual_assist_credit:          # manual route still benefits from pre-filled
+  optimistic: 0.65             # fields, the deterministic calc engine and the
+  central: 0.50                # pricing rules; credit scales with the share of
+  pessimistic: 0.30            # fields actually extracted (zero extraction =>
+                               # zero credit => as-is touch, continuity check)
+manual_external_factor: 0.50   # remaining administrative wait vs the as-is
+                               # fitted values NET of their embedded
+                               # clarification content (clarification is drawn
+                               # explicitly above; charging both would double-
+                               # count). Workspace tracking and in-band pricing
+                               # cut approval and batching waits even for
+                               # manual work (S).
+
+residual_defects:              # defects that survive review, by class & skill
+  reviewer_miss:               # P(wrong field survives review)
+    flagged:   {senior: 0.05, mid: 0.10}   # flagged uncertainty, engaged review
+    unflagged: {senior: 0.25, mid: 0.40}   # confidently wrong: automation bias
+    auto_one_click: {senior: 0.60, mid: 0.75}  # 5.4's uncomfortable implication,
+                               # kept: the 99-good-drafts reviewer approves the
+                               # 100th; this is why V1 exists
+  flag_threshold: 0.60         # fields below this arrive flagged in workspace
+  calc_rate_system: 0.003      # deterministic engine; residual = input defects
+  selection_rate_system: 0.015 # curve edges flagged not accepted (TOBE-04);
+                               # residual = defensible-but-wrong ties
+  pricing_rate_system: 0.005   # rules-based; residual = stale cost data
+
+# ---------------------------------------------------------------------------
+# Software error-reduction levers (author, 13 Sep). The defect rate is no
+# longer held near the as-is baseline: the tool actively cuts errors, and the
+# reduction is an OUTPUT of these mechanisms (variant-keyed, so the Monte Carlo
+# carries the range), not a headline assumption.
+#
+# software_defect_reduction: in the AUTOMATED lanes (auto/assisted) the
+#   deterministic calc engine, reference catalogue and rules-based pricing on
+#   live cost data cut the non-extraction error classes. Fraction removed from
+#   each class's residual system rate (central ~= halved; extraction defects are
+#   already handled by the review/reviewer-miss model above).
+software_defect_reduction:
+  calculation: {pessimistic: 0.35, central: 0.50, optimistic: 0.65}
+  selection:   {pessimistic: 0.35, central: 0.50, optimistic: 0.65}
+  pricing:     {pessimistic: 0.35, central: 0.50, optimistic: 0.65}
+
+# manual_extraction_credit: in the MANUAL lane the engineer still produces the
+#   quote by hand, but starts from validated AI prefill rather than a blank
+#   sheet. Cut overall manual-lane defect incidence by this fraction TIMES the
+#   share of fields correctly prefilled (docs.extracted_share), so the credit
+#   scales with prefill quality and vanishes if extraction fails (preserving the
+#   graceful-degradation gate). Realized reduction ~= 0.19 central. 15-30% band.
+manual_extraction_credit:
+  pessimistic: 0.15
+  central: 0.225
+  optimistic: 0.30
+
+asis_defects:                  # cluster model reproducing BASE-19/28/29:
+  p_defective:                 # defects chain (nearly every calc/selection
+    tier1: 0.06                # error began as an extraction problem, 4.4), so
+    tier2: 0.11                # classes co-occur: 9.2% weighted incidence with
+    tier3: 0.19                # class frequencies summing to 21.5%.
+  class_given_defective:       # calibrated: implied overall class frequencies
+    extraction: 0.95           # 8.7 / 3.5 / 5.0 / 4.0% of inquiries vs
+    calculation: 0.38          # BASE-29's 9 / 3.5 / 5 / 4.
+    selection: 0.54
+    pricing: 0.43
