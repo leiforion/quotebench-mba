@@ -55,6 +55,10 @@ class RunResult:
     busy_wh: float = 0.0
     horizon_wh: float = 0.0
     n_estimators: int = 2
+    productive_wh_per_year: float = None   # net pump-quoting hours/estimator/yr
+                                           # (BASE-05/06, 1,850 h); the util
+                                           # denominator. None => use the gross
+                                           # scheduling calendar (176 wh x 12).
 
     def by_tier(self, attr):
         out = {}
@@ -67,13 +71,21 @@ class RunResult:
         cyc = self.by_tier("cycle_wh")
         tch = self.by_tier("touch_wh")
         n_years = self.horizon_wh / (176 * 12)
+        # Utilisation = busy touch hours / available productive hours. The
+        # denominator is the NET pump-quoting capacity (1,850 h/estimator/yr,
+        # BASE-05/06), not the gross 176 wh x 12 scheduling calendar the DES
+        # ticks in, so the figure answers "how loaded are the estimators on pump
+        # quoting?" (16 x 1,850 = 29,600 avail h/yr).
+        avail_wh = (self.productive_wh_per_year * self.n_estimators * n_years
+                    if self.productive_wh_per_year
+                    else self.horizon_wh * self.n_estimators)
         s = {
             "cycle_median_wh": {t: float(np.median(cyc[t])) for t in TIERS},
             "cycle_p90_wh": {t: float(np.percentile(cyc[t], 90)) for t in TIERS},
             "touch_median_h": {t: float(np.median(tch[t])) for t in TIERS},
             "cost_per_quote_eur": {t: float(np.median(tch[t]) * rate_eur) for t in TIERS},
             "annual_inquiries": len(self.records) / n_years,
-            "utilization": self.busy_wh / (self.horizon_wh * self.n_estimators),
+            "utilization": self.busy_wh / avail_wh,
             "pickup_median_wh": float(np.median([r.pickup_wh for r in self.records])),
             "clarified_share": float(np.mean([r.clarified for r in self.records])),
         }
@@ -114,6 +126,7 @@ class AsIsModel:
         result = RunResult()
         estimators = [Estimator(env, e["name"], e["speed"]) for e in p["estimators"]]
         result.n_estimators = len(estimators)
+        result.productive_wh_per_year = p["clock"].get("productive_hours_per_year")
 
         def work(inq, est, duration, priority):
             remaining = duration

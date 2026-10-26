@@ -14,7 +14,8 @@ import numpy as np
 
 from .config import BASE, load_asis, load_econ, load_tobe
 from .economics import build_anchors, mc_from_anchors
-from .stress import fin_centrals, tornado
+from .stress import (crit_share_tornado_bar, fin_centrals, fr_miss_tornado_bar,
+                     tornado)
 from .tobe import ToBeModel
 
 FIG_DIR = os.path.join(BASE, "figures")
@@ -169,7 +170,13 @@ def export_all(seed=42, jobs=None):
                          win_uplift_frac=pe["win_uplift_pp"]["triangular"][1],
                          exclude_tiers=exclude)
     fig_waterfall(cb)
+    # Exhibit 9.3: the arithmetic levers plus the two DES-level bars (each needs
+    # an anchor re-run), using the paper's plain input labels.
     tor = tornado(pe, asis, anchors, scale, infra_annual_eur=infra_annual)
+    tor["wrong values slipping past review"] = fr_miss_tornado_bar(
+        pe, pa, pt, asis, scale, infra_annual_eur=infra_annual, jobs=jobs)
+    tor["share of critical fields"] = crit_share_tornado_bar(
+        pe, pa, pt, asis, scale, infra_annual_eur=infra_annual, jobs=jobs)
     base_npv = np.median(mc["npv12_draws"])
     fig_tornado(tor, base_npv)
     print("done.")

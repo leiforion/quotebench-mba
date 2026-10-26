@@ -5,7 +5,13 @@
 
 clock:
   working_hours_per_day: 8
-  working_days_per_month: 22   # => 176 working hours (wh) per month
+  working_days_per_month: 22   # => 176 working hours (wh) per month; this is the
+                               # scheduling calendar the DES ticks in (elapsed wh)
+  productive_hours_per_year: 1850  # NET pump-quoting hours per estimator used for
+                               # the utilisation check (BASE-05/06): the 176 wh/mo
+                               # calendar is gross; 1,850 h/yr is time actually
+                               # available for pump quoting after leave, admin and
+                               # other product lines. 16 x 1,850 = 29,600 avail h/yr
 
 arrivals_per_month:            # company-wide (D-COMPANY, 13 Sep): branch
   tier1: 251                   # BASE-14 (29/18/6) scaled x8.648 to reach
@@ -59,20 +65,20 @@ estimators:                    # company-wide = 16 estimators (BASE-02).
   - {name: mid_7, skill: mid, speed: 1.13, error_mult: 1.2}
   - {name: mid_8, skill: mid, speed: 1.13, error_mult: 1.2}
 
-pump_count_bounds:             # BASE-13 (M)
-  tier1: [1, 2]
-  tier2: [3, 12]
+pump_count_bounds:             # BASE-13 (M): 1-3 / 4-12 / >12 pumps
+  tier1: [1, 3]
+  tier2: [4, 12]
   tier3: [13, 80]
 preemption_pump_threshold: 40  # large Tier 3 (~monthly) pre-empts (4.5)
 
-hourly_rate_eur: 12.28         # loaded cost AED 96,000 = EUR 22,588 (FX 4.25)
-                               # over 46 working weeks x 40 h = 1,840 h/yr
+hourly_rate_eur: 12.21         # loaded cost AED 96,000 = EUR 22,588 (FX 4.25)
+                               # over 1,850 productive hours/yr (BASE-05/06)
 
 calibration_targets:           # the SIM-1 gate; tolerance ±10% (tests/)
   cycle_median_wh: {tier1: 18, tier2: 39, tier3: 88}     # BASE-15 (M)
   cycle_p90_wh:    {tier1: 34, tier2: 71, tier3: 162}    # BASE-16 (M)
   touch_median_h:  {tier1: 2.1, tier2: 5.5, tier3: 11.4} # BASE-17 (M)
-  cost_per_quote_eur: {tier1: 26, tier2: 68, tier3: 140} # touch x 12.28
+  cost_per_quote_eur: {tier1: 26, tier2: 67, tier3: 139} # touch x 12.21 (1,850 h)
   queue_share_pct: {low: 84, high: 90}                   # BASE-22 (M) 86-88 ±2
   annual_inquiries: 5500                                 # company-wide (D-COMPANY)
   pickup_median_wh: 14                                   # BASE-23 (M), diagnostic

@@ -1,24 +1,24 @@
 id,name,value,unit,tag,source,sections_used,status,note
-GEN-01,FX conversion rate,0.23,EUR per AED,decision,Authors 2026-09-06 (D1),all monetary figures,locked,Stated once in Section 3; workbook converts on same rate
+GEN-01,FX conversion rate,0.2353,EUR per AED,decision,Authors 2026-09-06 (D1),all monetary figures,locked,= 1/4.25 (AED 4.25 per EUR); stated once in Section 3; workbook converts on same rate
 GEN-02,Product name,QuoteBench,text,decision,Authors 2026-09-06 (D7),paper-wide,locked,C20 resolved: Khoory's QuoteBench; named in 7.1; Quomate retired
 BASE-01,Estimators at study branch,2,persons,M,branch org / observation,2.0;4.5,locked,Third pulled from another desk during Innovo
 BASE-02,Estimators company-wide (UAE),16,persons,M,company org,2.2;3.1,locked,
 BASE-03,Inquiries at study branch 2025,640,inquiries/yr,M,RFQ log,3.1;4.0;4.2;4.3,locked,Tier arithmetic checks: 53/mo = 29+18+6
 BASE-04,Inquiries per estimator-week (company),12,inquiries/wk,E,management,2.2;3.1,locked,D9 confirmed: 640 = pump RFQs only; 12/wk spans all product lines. Propagated to Doc (T05)
-BASE-05,Estimator fully loaded cost,96000,AED/yr,E,payroll+headcount,2.2;6.1,locked,C7 resolved: EUR 22080 (~22k) over ~1840 productive hours = EUR 12/h exactly
-BASE-06,Loaded hourly rate (estimation+sales),52,AED/h,E,payroll,4.1;4.3,locked,C7 resolved: EUR 12/h (AED 52); bridge = 46 working weeks x 40h
+BASE-05,Estimator fully loaded cost,96000,AED/yr,E,payroll+headcount,2.2;6.1,locked,EUR 22588 over 1850 productive hours/yr = EUR 12.21/h (was ~1840 h / EUR 12.28)
+BASE-06,Loaded hourly rate (estimation+sales),51.9,AED/h,E,payroll,4.1;4.3,locked,EUR 12.21/h (AED 51.9 at FX 4.25); bridge = EUR 22588 / 1850 productive hours/yr
 BASE-07,Hiring lead time,2-3,months,E,interviews,2.2;6.1,locked,
 BASE-08,Ramp to full productivity,3-4,months,E,interviews,2.2;6.1,locked,
-BASE-09,Tenders lost to late/rushed quotes,15,% of tenders,E,sales interviews,2.2;9.3,locked,C15 resolved: tagged (E) upper bound in 2.2 via T05; triangulated in 9.3
+BASE-09,Tenders lost to late/rushed quotes,2,% of tenders,E,sales interviews,2.2;9.3,locked,"D-LATE: sales estimate 2% of tenders lost to late quotes. Recovering all at measured tier win rates + value shares (BASE-11/20) caps the win uplift at ~7.8% of revenue (0.02/0.255); the 0-5% range (central 2%) sits inside it"
 BASE-10,Tier volume shares (T1/T2/T3),55/33/12,% of inquiries,M,RFQ log,4.2,locked,
 BASE-11,Tier value shares (T1/T2/T3),12/41/47,% of quoted value,M,RFQ log,4.2,locked,Value inversion - key finding; D19: shares preserved under the x6.125 rebase; O9 resolved (actual AED 150M won)
 BASE-12,Tier value thresholds,<245k / 245k-2.14M / >2.14M,AED,E,D19 rescale x6.125,4.2,locked,"EUR: <56k / 56-493k / >493k; re-derived from actual revenue (D19), was measured at 6x-low level; RE-MEASURE from RFQ log"
-BASE-13,Tier pump-count bounds,1-2 / 3-12 / >12,pumps,M,4.2 taxonomy,4.2;2.2,locked,C2/C4 resolved: taxonomy is canonical; 2.2 prose rewritten per conflict_resolutions.md
+BASE-13,Tier pump-count bounds,1-3 / 4-12 / >12,pumps,M,4.2 taxonomy,4.2;2.2,locked,C2/C4 resolved: taxonomy is canonical (1-3 / 4-12 / >12 pumps); 2.2 prose rewritten per conflict_resolutions.md
 BASE-14,Inquiries per month by tier,29/18/6,inquiries/mo,M,RFQ log,4.3,locked,
 BASE-15,Median cycle time by tier,18/39/88,working hours,M,observation+log,4.3;8.2,locked,Simulation calibration target
 BASE-16,P90 cycle time by tier,34/71/162,working hours,M,observation+log,4.3;8.2,locked,Simulation calibration target
 BASE-17,Touch time by tier,2.1/5.5/11.4,hours,M,observation,4.3;2.2,locked,C3 resolved: 5.5h canonical for Tier 2; 2.2 rewritten
-BASE-18,Direct cost per quote by tier,109/286/593,AED,E,touch x rate + licences,4.3;9.1,locked,EUR ~25/66/136; must reconcile after C7 resolution
+BASE-18,Direct cost per quote by tier,111/285/591,AED,E,touch x rate,4.3;9.1,locked,EUR 26/67/139 = touch 2.1/5.5/11.4 h x EUR 12.21/h (1850 h basis); AED at FX 4.25
 BASE-19,Inquiries with >=1 defect by tier,6/11/19,%,E,120-quote audit,4.3;2.2,locked,C6 resolved: 2.2 restated in inquiry terms (1 in 9 Tier 2; 1 in 5 Tier 3)
 BASE-20,Win rate by tier,34/27/22,%,M,RFQ log,4.3;9.3,locked,
 BASE-21,Gross margin on won quotes by tier,18.5/22.5/27.8,%,E,D19: measured pattern x1.323,4.3;9.x,locked,"Measured 14/17/21 (M) rescaled so won-value-weighted average = 24% (authors, D19); simulated weighted 24.1%"
@@ -32,16 +32,16 @@ BASE-28,Error class share of defects (extr/calc/sel/price),41/17/23/19,%,E,120-q
 BASE-29,Error class frequency (extr/calc/sel/price),9/3.5/5/4,% of inquiries,E,120-quote audit,4.4,locked,
 BASE-30,Error unit costs (extr/calc/sel/price),3675/11638/49000/19600,AED,E,credit-note ledger (D19/D21),4.4,locked,EUR ~845/2677/11270/4508 = AVERAGE cost per defect; D21 per-quote cost = unit x (value/ref_value) with ref_value the defect-weighted mean as-is value (aggregate average preserved); calc site-failure tail >153k AED (~35.2k EUR) at p=0.10
 BASE-31,Quality cost,0.46,% of revenue,E,audit+ledger,4.4;9.2,superseded,D19 retired it as a calibration target; D21 reports it as emergent: as-is error cost EUR ~1.41M = 0.46% of the EUR ~304M derived company revenue (value-proportional; won-weighted; concentrated in Tier 3 at ~56%). Resolves A7
-BASE-32,Discount spread on comparable Tier 2 work,4-18,%,M,2025 quotation matching,4.4;4.7;7.6,locked,
-BASE-33,Discount leakage,1.9,% of revenue,E,vs median like-for-like discount,4.4;7.6;7.8;9.2,locked,Sleeper benefit
-BASE-34,Total quality + discount leakage,3.1,% of revenue,E,sum,4.4;9.2,locked,
+BASE-32,Discount spread on comparable Tier 2 work,4-18,%,M,2025 quotation matching,4.4;4.7;7.6,retired,"RETIRED: the business does not offer discounts (author, 13 Sep); no discount-leakage pool or pricing-recovery benefit in the model"
+BASE-33,Discount leakage,1.9,% of revenue,E,vs median like-for-like discount,4.4;7.6;7.8;9.2,retired,"RETIRED with BASE-32: no discount benefit anywhere in the model"
+BASE-34,Total quality + discount leakage,3.1,% of revenue,E,sum,4.4;9.2,retired,"RETIRED with BASE-32/33: quality cost now reported standalone (BASE-31)"
 BASE-35,Innovo scope,75 pumps / 5 applications,count,M,mailbox+logs,2.0;4.5;7.9,locked,
 BASE-36,Innovo touch total,28,hours,M,estimator logs,2.0;4.5;7.9,locked,2.2 'four or five working days' (C5) must align to ~3.5 days
 BASE-37,Innovo elapsed,7 (quote 2 days past deadline),calendar days,M,mailbox,2.0;4.5;7.9,locked,"C10 resolved and propagated: Table 4.4 rebuilt in Doc; touch 28h, 7-day elapse intact"
 BASE-38,Time-and-motion sample,22,inquiries,M,3-week observation,3.2;4.0;3.4,locked,
 BASE-39,Quotation audit sample,120,quotations,E,stratified sample,3.2;4.3;4.4,locked,
 BASE-40,Internal interviews count,[n],interviews,E,Table 3.1,3.2,pending,O3: authors to supply
-BASE-41,Contractor interviews,4-6,interviews,E,protocol App D,3.2;4.6;9.3,pending,D6: assume thesis-supportive provisionally; transcripts pending; include >=1 dissent when written
+BASE-41,Contractor interviews,2,interviews,E,protocol App D,3.2;4.6;9.3,pending,D6: 2 contractor interviews conducted; assume thesis-supportive provisionally; transcripts pending; include >=1 dissent when written
 TOBE-01,[A1] Intake classification time,~1,minute,S,process model,7.3;7.9,pending,Pending 8.1 audit + 8.2 simulation
 TOBE-02,[A2] Extraction + validation time,~12,minutes,S,process model,7.9,pending,16:40 receipt to 16:52 schema in walk-through
 TOBE-03,[A3] Consolidated clarification issued,~13,minutes after receipt,S,process model,7.3;7.9,pending,vs BASE-25 as-is
@@ -58,19 +58,19 @@ TOBE-13,Critical-field verification miss (D24 design c),0.05/0.10/0.15,P(critica
 TOBE-14,Verification time per critical field (D24 design c),2.0/3.0/5.0,minutes,S,ASSUMPTION - authors to measure in pilot,7.2;8.2,proposed,opt/central/pess engineer minutes to check one critical field against the source
 TOBE-15,Tier-3 design adopted (D24),c = engines + full review + critical verification,design choice,S,SIM-5 three-way comparison (rule A),7.2;8.2,proposed,(a) manual+prefill / (b) engines+full review / (c) +source verification. (c) meets both gates at lowest total cost (highest P50 NPV); (b) fails the material gate (T3 24.9% > as-is 15.9%)
 BASE-43,Material defect definition (D24),wrong model / wrong price / missed spec,definition,E,120-quote audit (BASE-19/28/29),2.1;4.2;8.2,proposed,"Unified as-is vs to-be defect definition. A hand-built (as-is / to-be manual) extraction defect is a logged missed-spec = material; a cosmetic non-critical automated-lane typo is NOT. As-is material reproduces the audit 6/11/19% (9.2% company); to-be material by tier 3.7/7.5/3.3% (4.9% company) at the registered operating point"
-FIN-01,Quomate subscription price (S/M/L),120000/200000/320000,AED/yr,S,Assumptions!B7:B9,workbook;10.3,unlocked,EUR 27.6k/46k/73.6k; no willingness-to-pay evidence yet
-FIN-02,Quomate setup fee (S/M/L),50000/90000/140000,AED,S,Assumptions!C7:C9,workbook,unlocked,EUR 11.5k/20.7k/32.2k
-FIN-03,Annual churn,8,% of active base,S,Assumptions!B11,workbook,unlocked,ROUND artifact: churn invisible at Y1-Y2 counts
-FIN-04,New customers per year (total),3/8/14/12/13,customers,S,Assumptions!R15:17,workbook,unlocked,No pipeline evidence; MC driver
-FIN-05,Active customers EOY,3/11/25/35/46,customers,S,formula,workbook,unlocked,
-FIN-06,Cost of revenue per active customer,32000,AED/yr,S,Assumptions!B28,workbook,conflicted,C24: authors' own '??' note; sets gross margin
-FIN-07,Onboarding delivery cost per new customer,18000,AED,S,Assumptions!B29,workbook,conflicted,C24: '??' note
-FIN-08,MVP build cost (one-time Y1),400000,AED,S,Assumptions!B30,workbook;9.4,locked,D10: basis = one year of internal software-engineer cost (EUR 92k); MC centres here with +30% overrun tail; run costs priced separately
-FIN-09,Discount rate,20,%,S,Assumptions!B40,workbook;9.5,locked,"D11: internal case discounts at 12% (WACC proxy) vs 15% hurdle, sensitivity 10-20%; the 20% stays only in the 10.3 venture exhibit"
-FIN-10,5-year NPV of net profit,3736490,AED,S,P&L!C38,workbook,unlocked,"EUR 859,393; NPV convention discounts Y1 at end-year-1"
-FIN-11,Year 5 ARR (subscription only),8640000,AED,S,P&L!C47,workbook,unlocked,EUR 1.99M
-FIN-12,Valuation multiples,4/6/8/10,x ARR,S,P&L!B50:B53,workbook,unlocked,EV EUR 7.9M/11.9M/15.9M/19.9M; label illustrative
-FIN-13,Opex total Y1-Y5,450000/1620000/2900000/3880000/4750000,AED/yr,S,P&L!R25,workbook,unlocked,Founder draw + eng + CS + S&M + tools + legal
+FIN-01,Quomate subscription price (S/M/L),120000/200000/320000,AED/yr,S,Assumptions!B7:B9,workbook;10.3,retired,RETIRED (licensing venture; see FIN-14): EUR 27.6k/46k/73.6k; no willingness-to-pay evidence yet
+FIN-02,Quomate setup fee (S/M/L),50000/90000/140000,AED,S,Assumptions!C7:C9,workbook,retired,RETIRED (licensing venture; see FIN-14): EUR 11.5k/20.7k/32.2k
+FIN-03,Annual churn,8,% of active base,S,Assumptions!B11,workbook,retired,RETIRED (licensing venture; see FIN-14): ROUND artifact: churn invisible at Y1-Y2 counts
+FIN-04,New customers per year (total),3/8/14/12/13,customers,S,Assumptions!R15:17,workbook,retired,RETIRED (licensing venture; see FIN-14): No pipeline evidence; MC driver
+FIN-05,Active customers EOY,3/11/25/35/46,customers,S,formula,workbook,retired,RETIRED (licensing venture; see FIN-14)
+FIN-06,Cost of revenue per active customer,32000,AED/yr,S,Assumptions!B28,workbook,retired,RETIRED (licensing venture; see FIN-14): C24: authors' own '??' note; sets gross margin
+FIN-07,Onboarding delivery cost per new customer,18000,AED,S,Assumptions!B29,workbook,retired,RETIRED (licensing venture; see FIN-14): C24: '??' note
+FIN-08,MVP build cost (one-time Y1),400000,AED,S,Assumptions!B30,workbook;9.4,retired,RETIRED (licensing venture; see FIN-14): D10: basis = one year of internal software-engineer cost (EUR 92k); MC centres here with +30% overrun tail; run costs priced separately
+FIN-09,Discount rate,20,%,S,Assumptions!B40,workbook;9.5,retired,"RETIRED (licensing venture; see FIN-14): D11 internal case discounts at 12% (WACC proxy) vs 15% hurdle, sensitivity 10-20%; the 20% stays only in the 10.3 venture exhibit"
+FIN-10,5-year NPV of net profit,3736490,AED,S,P&L!C38,workbook,retired,"RETIRED (licensing venture; see FIN-14): EUR 859,393; NPV convention discounts Y1 at end-year-1"
+FIN-11,Year 5 ARR (subscription only),8640000,AED,S,P&L!C47,workbook,retired,RETIRED (licensing venture; see FIN-14): EUR 1.99M
+FIN-12,Valuation multiples,4/6/8/10,x ARR,S,P&L!B50:B53,workbook,retired,RETIRED (licensing venture; see FIN-14): EV EUR 7.9M/11.9M/15.9M/19.9M; label illustrative
+FIN-13,Opex total Y1-Y5,450000/1620000/2900000/3880000/4750000,AED/yr,S,P&L!R25,workbook,retired,RETIRED (licensing venture; see FIN-14): Founder draw + eng + CS + S&M + tools + legal
 FIN-14,Business-model frame,internal investment case,structural,decision,Authors 2026-09-06 (D7),9;10.3;11;MC design,locked,C17 resolved: Section 9 = internal case; workbook feeds only the 10.3 licensing exhibit; MC harness built accordingly (model/monte_carlo.py)
 SEC6-01,Option A crossover volume (labour-only),1000-1300,pump RFQs/yr,S,register arithmetic (model/monte_carlo.py --validate),6.3;9.5,pending,Provisional: span of pre-audit automation range 0.35-0.75 with placeholder run costs; recompute after 8.1 audit and 9.4; Doc states the range
 T14-01,Innovo to-be touch (simulated),15 (11-20),hours,S,tobe manifest 20260906_154222 (tier-3 touch ratio 6.2/11.4 applied to BASE-36),7.9;9.6,proposed,Range = pessimistic-optimistic capability variants

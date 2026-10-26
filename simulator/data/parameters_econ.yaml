@@ -2,7 +2,7 @@
 # row; PROVISIONAL rows await the 9.4 cost model and are flagged exactly as in
 # the retired model/monte_carlo.py harness they absorb. All EUR (GEN-01).
 
-hourly_rate_eur: 12.28         # AED 96,000 = EUR 22,588 (FX 4.25) / 1,840 h
+hourly_rate_eur: 12.21         # EUR 22,588 (AED 96,000 @ FX 4.25) / 1,850 h
 
 # Company-level anchors (D-COMPANY, 13 Sep; revenue basis fixed in D21).
 # Redeployment is valued on the headcount basis the authors chose: emergent
@@ -87,11 +87,16 @@ error_cost_value_proportional: true
 error_lost_bid:
   p_loss_triangular: [0.0, 0.0, 0.0]
 
-win_uplift_pp:                 # response-time elasticity, 9.3: floored at
-  triangular: [0.00, 0.02, 0.05]  # zero, capped by triangulation (15% of
-                               # tenders lost to late quotes is the upper
-                               # bound; 5pp on a 27% base is ~18% relative,
-                               # inside it). PROVISIONAL pending 9.3.
+win_uplift_pp:                 # response-time elasticity (9.3), expressed as a
+  triangular: [0.00, 0.02, 0.05]  # fraction of WON revenue; floored at zero.
+                               # Cap: sales estimate 2% of tenders are lost to
+                               # late quotes (BASE-09). Recovering all of them,
+                               # valued at the measured tier win rates and value
+                               # shares (BASE-11/20), adds ~7.8% of revenue
+                               # (0.02 / sum(value_share x win_rate) = 0.02/0.255;
+                               # ~6.6% on a volume-weighted basis). The 0-5%
+                               # range (central 2%) therefore sits inside the
+                               # cap. PROVISIONAL pending 9.3.
 
 financial:
   build_cost_eur: 93000        # existing engineer, year 1 of build (author,

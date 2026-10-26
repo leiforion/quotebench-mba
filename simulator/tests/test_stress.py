@@ -70,7 +70,8 @@ def test_tornado_widths_positive_and_uplift_dominates():
     tor = tornado(pe, ASIS, anchors3, scale=2.3)
     widths = {k: hi - lo for k, (lo, hi) in tor.items()}
     assert all(w >= 0 for w in widths.values())
-    assert max(widths, key=widths.get) == "win uplift (0-5pp)"
+    assert max(widths, key=widths.get) == "extra tenders won (0-5% of revenue)"
+    assert "error lost-bid (0-2x)" not in tor      # inert bar dropped (change 4)
 
 
 def test_build_multiplier_boundary_above_one():

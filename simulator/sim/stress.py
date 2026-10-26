@@ -161,22 +161,22 @@ def tornado(pe, base_asis, anchors3, scale, infra_annual_eur=0.0):
         vals.update(over)
         return case_npvs(base_asis, tobe, scale, pe, vals)["npv12"]
 
+    # Plain-label levers for Exhibit 9.3. The inert defect-killed-bid sweep is
+    # dropped (central p_loss = 0 -> zero width). The two DES-level bars ("wrong
+    # values slipping past review", "share of critical fields") are appended by
+    # the figure/stress drivers, which can re-run the anchors.
     levers = {
-        "extraction (5.3 range)": [npv_at(extraction=0), npv_at(extraction=1)],
-        "win uplift (0-5pp)": [
+        "document readability (5.2)": [npv_at(extraction=0), npv_at(extraction=1)],
+        "extra tenders won (0-5% of revenue)": [
             npv_at(win_uplift_pp=pe["win_uplift_pp"]["triangular"][0]),
             npv_at(win_uplift_pp=pe["win_uplift_pp"]["triangular"][2])],
         "build overrun": [
             npv_at(build_overrun=fin["build_overrun_triangular"][2]),
             npv_at(build_overrun=fin["build_overrun_triangular"][0])],
-        "run cost": [npv_at(run_cost=run_tri[2]),
-                     npv_at(run_cost=run_tri[0])],
+        "running cost": [npv_at(run_cost=run_tri[2]),
+                         npv_at(run_cost=run_tri[0])],
         "change cost": [npv_at(change_cost=fin["change_cost_triangular"][2]),
                         npv_at(change_cost=fin["change_cost_triangular"][0])],
-        # D21: defect-killed bids, swept [0, 2 x central]. Inert (zero width)
-        # until the authors supply a central p_loss above zero.
-        "error lost-bid (0-2x)": [npv_at(p_loss=0.0),
-                                  npv_at(p_loss=2 * lost_bid_central(pe))],
     }
     return {k: sorted(v) for k, v in levers.items()}
 
@@ -304,9 +304,9 @@ def stress_all(seed=42, verbose=True, jobs=None):
     log("computing tornado ranges")
     print("\nTornado (NPV@12% one-at-a-time ranges, EUR):")
     tor = tornado(pe, base_asis, anchors3, scale, infra_annual_eur=infra_annual)
-    tor["fr unflagged miss (.15-.40)"] = fr_miss_tornado_bar(
+    tor["wrong values slipping past review"] = fr_miss_tornado_bar(
         pe, pa, pt, base_asis, scale, infra_annual_eur=infra_annual, jobs=jobs)
-    tor["critical field share (D24)"] = crit_share_tornado_bar(
+    tor["share of critical fields"] = crit_share_tornado_bar(
         pe, pa, pt, base_asis, scale, infra_annual_eur=infra_annual, jobs=jobs)
     for k, (lo, hi) in sorted(tor.items(), key=lambda kv: -(kv[1][1] - kv[1][0])):
         print(f"  {k:<24} {lo:>10,.0f} .. {hi:>10,.0f}   width {hi - lo:>9,.0f}")
