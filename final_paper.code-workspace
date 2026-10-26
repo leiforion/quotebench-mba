@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"name": "final_paper",
+			"path": "."
+		}
+	],
+	"settings": {
+		"search.exclude": {
+			"**/__pycache__": true,
+			"source_docs/snapshots": true
+		}
+	}
+}

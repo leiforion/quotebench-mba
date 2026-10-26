@@ -1,0 +1,24 @@
+# --- Secrets / credentials ---
+google_key.json
+*.key.json
+service_account*.json
+
+# --- Archives ---
+*.zip
+simulator.zip
+
+# --- Python ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# --- OS / editor cruft ---
+.DS_Store
+*.swp
+.idea/

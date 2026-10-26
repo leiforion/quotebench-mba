@@ -1,0 +1,94 @@
+{
+  "kind": "stress",
+  "timestamp": "20260913_161351",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "207a86a",
+  "params_checksum": "994b5646a1b8",
+  "scenarios": [
+    {
+      "name": "base_central",
+      "benefits_yr": 428695.7804024685,
+      "npv12": 825594.4752916876,
+      "npv_hurdle": 745939.765752246
+    },
+    {
+      "name": "adoption_failure",
+      "benefits_yr": 363451.3001768739,
+      "npv12": 646784.2758350444,
+      "npv_hurdle": 581744.4403531775
+    },
+    {
+      "name": "build_overrun_30",
+      "benefits_yr": 428695.7804024685,
+      "npv12": 802344.4752916876,
+      "npv_hurdle": 722689.765752246
+    },
+    {
+      "name": "build_overrun_60",
+      "benefits_yr": 428695.7804024685,
+      "npv12": 774444.4752916876,
+      "npv_hurdle": 694789.765752246
+    },
+    {
+      "name": "demand_collapse",
+      "benefits_yr": 394949.8192586616,
+      "npv12": 733109.6854348879,
+      "npv_hurdle": 661014.128338124
+    },
+    {
+      "name": "demand_surge",
+      "benefits_yr": 428179.606737474,
+      "npv12": 824179.8404341056,
+      "npv_hurdle": 744640.7546697275
+    },
+    {
+      "name": "elasticity_zero",
+      "benefits_yr": 259284.01400246855,
+      "npv12": 361301.5322634918,
+      "npv_hurdle": 319595.3452848287
+    },
+    {
+      "name": "extraction_pessimistic",
+      "benefits_yr": 324801.1092608108,
+      "npv12": 540858.8653966074,
+      "npv_hurdle": 484476.7381313795
+    },
+    {
+      "name": "senior_attrition",
+      "benefits_yr": 413148.4533753913,
+      "npv12": 782985.1903818086,
+      "npv_hurdle": 706813.1084247616
+    }
+  ],
+  "tornado": {
+    "extraction (5.3 range)": [
+      546973.4125591082,
+      1068779.1572369086
+    ],
+    "win uplift (0-5pp)": [
+      361301.5322634918,
+      1522033.889833982
+    ],
+    "build overrun": [
+      802344.4752916876,
+      830244.4752916876
+    ],
+    "run cost": [
+      816914.3044837045,
+      828198.5265340826
+    ],
+    "change cost": [
+      813594.4752916876,
+      833594.4752916876
+    ]
+  },
+  "kill_criteria": {
+    "win_uplift_pp (below)": null,
+    "extraction weight (below)": null,
+    "build multiplier (above)": null,
+    "run cost EUR/yr (above)": null,
+    "demand multiplier (below)": null
+  },
+  "quality_scale": 1.0
+}

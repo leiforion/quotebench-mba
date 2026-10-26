@@ -1,0 +1,73 @@
+{
+  "kind": "pnl",
+  "timestamp": "20261026_123641",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "no-git",
+  "params_checksum": "53a506e957de",
+  "npv12_p10_p50_p90": [
+    3112648.4492445327,
+    5651127.480847184,
+    8676951.81144402
+  ],
+  "p_clears_hurdle": 1.0,
+  "irr_median": 4.038482913652708,
+  "payback_median_years": 0.20724057627515452,
+  "automation_rate": {
+    "pessimistic": 0.337152292128298,
+    "central": 0.5458913469091917,
+    "optimistic": 0.7029292004226666
+  },
+  "benefit_medians": {
+    "labour_redeploy": 197451.88686620118,
+    "quality_savings": 327693.6058399695,
+    "win_uplift_margin": 1656396.4493089663,
+    "error_lost_bid": 0.0
+  },
+  "infra_annual_eur": 4815.92771409024,
+  "infra_by_service_eur": {
+    "Aurora PostgreSQL": 2369.1923688,
+    "OpenSearch (vector)": 1360.1801836799998,
+    "Fargate (web app)": 485.97417504000003,
+    "Textract (OCR, cross-border)": 386.153625,
+    "Bedrock (extraction)": 157.50220186800001,
+    "S3 (documents)": 33.417140625,
+    "DynamoDB (catalogue)": 13.00606627524,
+    "OpenAI (CAD, external)": 7.485439500000001,
+    "Step Functions": 1.9604722500000002,
+    "SES (email)": 0.8554788000000001,
+    "Lambda": 0.20056225199999997,
+    "Cognito (auth)": 0.0
+  },
+  "conservative_case": {
+    "npv_at_12pct": 601918.7905540048,
+    "npv_at_hurdle": 538645.675292996,
+    "clears": true
+  },
+  "conservative_benefits": {
+    "labour_redeploy": 121849.53559350393,
+    "quality_savings": 233714.6803663012,
+    "win_uplift_margin": 0.0,
+    "error_lost_bid": 0.0
+  },
+  "asis_eng_hours": 24900.595472322235,
+  "tobe_eng_hours": 11307.575871095329,
+  "asis_won_value_eur": 303785896.93257934,
+  "revenue_basis": "branch",
+  "company_revenue_eur": 303785896.93257934,
+  "asis_error_by_tier_eur": {
+    "tier1": 99621.29898780711,
+    "tier2": 523455.5521575154,
+    "tier3": 785881.4311256333
+  },
+  "asis_won_by_tier_eur": {
+    "tier1": 46782014.06852118,
+    "tier2": 133606386.0927437,
+    "tier3": 123824626.93860924
+  },
+  "asis_quality_cost_eur": 1413233.3312954896,
+  "tobe_quality_cost_eur": 1086114.7542149508,
+  "run_cost_central_eur": 64815.92771409024,
+  "build_cost_eur": 93000,
+  "benefit_total_eur": 2181541.942015137
+}

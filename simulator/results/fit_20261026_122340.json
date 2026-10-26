@@ -1,0 +1,20 @@
+{
+  "kind": "fit",
+  "timestamp": "20261026_122340",
+  "seed": 1000,
+  "years": 6,
+  "git_commit": "no-git",
+  "params_checksum": "53a506e957de",
+  "fitted": {
+    "residual_queue_median_wh": {
+      "tier1": 1.24,
+      "tier2": 15.39,
+      "tier3": 58.39
+    },
+    "residual_queue_sigma": {
+      "tier1": 1.234,
+      "tier2": 0.834,
+      "tier3": 0.635
+    }
+  }
+}

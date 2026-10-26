@@ -1,0 +1,17 @@
+service,type,usd_per_year,eur_per_year,share_pct
+Aurora PostgreSQL,always-on,2741.74,2369.19,49.19
+OpenSearch (vector),always-on,1574.06,1360.18,28.24
+Fargate (web app),always-on,562.39,485.97,10.09
+"Textract (OCR, cross-border)",per-inquiry,446.88,386.15,8.02
+Bedrock (extraction),per-inquiry,182.27,157.5,3.27
+S3 (documents),per-inquiry,38.67,33.42,0.69
+DynamoDB (catalogue),per-inquiry,15.05,13.01,0.27
+"OpenAI (CAD, external)",per-inquiry,8.66,7.49,0.16
+Step Functions,per-inquiry,2.27,1.96,0.04
+SES (email),always-on,0.99,0.86,0.02
+Lambda,per-inquiry,0.23,0.2,0.0
+Cognito (auth),always-on,0.0,0.0,0.0
+TOTAL annual (full adoption),,5573.22,4815.93,100.0
+
+year,Y1,Y2,Y3,Y4,Y5,5yr_total
+eur,4396.12,4636.01,4815.93,4815.93,4815.93,23479.91

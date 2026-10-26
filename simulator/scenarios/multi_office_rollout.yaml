@@ -1,0 +1,12 @@
+name: multi_office_rollout
+description: >-
+  Change / rollout cost sized for a company-wide, multi-office deployment to all
+  16 estimators, rather than the 2-estimator Abu Dhabi branch pilot the central
+  EUR 18k change cost was scoped for (D21). Assumption (UNAPPROVED, authors to
+  sign off): training + transition cost scales linearly with estimator headcount,
+  so change cost x8 = EUR 144k, plus a +30% build overrun for multi-site rollout
+  coordination. Central costs are NOT changed; this scenario only isolates the
+  sensitivity of the case to a company-scale rollout cost.
+reuse_base_anchors: true
+change_cost: 144000
+build_overrun: 1.30

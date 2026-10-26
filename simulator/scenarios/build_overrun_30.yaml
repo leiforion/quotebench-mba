@@ -1,0 +1,4 @@
+name: build_overrun_30
+description: "Build cost +30% (9.5 hostile case component)."
+reuse_base_anchors: true
+build_overrun: 1.30

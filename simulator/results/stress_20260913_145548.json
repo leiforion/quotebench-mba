@@ -1,0 +1,94 @@
+{
+  "kind": "stress",
+  "timestamp": "20260913_145548",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "207a86a",
+  "params_checksum": "677724b41d2a",
+  "scenarios": [
+    {
+      "name": "base_central",
+      "benefits_yr": 436836.66210295394,
+      "npv12": 846347.5277042618,
+      "npv_hurdle": 764978.4304588801
+    },
+    {
+      "name": "adoption_failure",
+      "benefits_yr": 363331.4573559758,
+      "npv12": 644897.8376084468,
+      "npv_hurdle": 579994.0307023987
+    },
+    {
+      "name": "build_overrun_30",
+      "benefits_yr": 436836.66210295394,
+      "npv12": 823097.5277042618,
+      "npv_hurdle": 741728.4304588801
+    },
+    {
+      "name": "build_overrun_60",
+      "benefits_yr": 436836.66210295394,
+      "npv12": 795197.5277042618,
+      "npv_hurdle": 713828.4304588801
+    },
+    {
+      "name": "demand_collapse",
+      "benefits_yr": 409550.2572532919,
+      "npv12": 771565.9143516462,
+      "npv_hurdle": 696309.0180002395
+    },
+    {
+      "name": "demand_surge",
+      "benefits_yr": 418868.1349152865,
+      "npv12": 797102.6579580463,
+      "npv_hurdle": 719758.5412311677
+    },
+    {
+      "name": "elasticity_zero",
+      "benefits_yr": 252036.66210295394,
+      "npv12": 339881.31408233347,
+      "npv_hurdle": 299907.729783046
+    },
+    {
+      "name": "extraction_pessimistic",
+      "benefits_yr": 328027.90982758417,
+      "npv12": 548144.2984086291,
+      "npv_hurdle": 491148.5459330713
+    },
+    {
+      "name": "senior_attrition",
+      "benefits_yr": 413178.57848640997,
+      "npv12": 781509.7569747055,
+      "npv_hurdle": 705440.1105227679
+    }
+  ],
+  "tornado": {
+    "extraction (5.3 range)": [
+      559455.1127009462,
+      1059089.7352640508
+    ],
+    "win uplift (0-5pp)": [
+      339881.31408233347,
+      1606046.8481371542
+    ],
+    "build overrun": [
+      823097.5277042618,
+      850997.5277042618
+    ],
+    "run cost": [
+      836888.3594813836,
+      849185.2781711251
+    ],
+    "change cost": [
+      834347.5277042618,
+      854347.5277042618
+    ]
+  },
+  "kill_criteria": {
+    "win_uplift_pp (below)": null,
+    "extraction weight (below)": null,
+    "build multiplier (above)": null,
+    "run cost EUR/yr (above)": null,
+    "demand multiplier (below)": null
+  },
+  "quality_scale": 1.0
+}

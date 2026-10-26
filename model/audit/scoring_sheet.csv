@@ -1,0 +1,2 @@
+rfq_id,tier,scorer,date_scored,primary_carrier,attachments_clean_pdf,attachments_scanned,attachments_email_fragment,attachments_cad,cad_dependent,system_count,f01_identity,f02_system_type,f03_system_count,f04_flow,f05_static_head,f06_pipe_run,f07_diameter_material,f08_fittings,f09_fluid_temp,f10_power,f11_delivery_date,minutes_spent,notes
+EXAMPLE-2025-0417,2,EstimatorA,2026-09-10,scanned_schedule,1,2,1,0,no,3,A,B,B,B,C,D,A,D,B,A,D,22,"static head conflicts between risers R2/R3 (grade C per boundary rule 1); fittings absent, default profile would apply"

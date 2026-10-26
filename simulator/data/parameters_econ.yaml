@@ -1,0 +1,121 @@
+# Economics and investment-case parameters (SIM-3). Register citations per
+# row; PROVISIONAL rows await the 9.4 cost model and are flagged exactly as in
+# the retired model/monte_carlo.py harness they absorb. All EUR (GEN-01).
+
+hourly_rate_eur: 12.28         # AED 96,000 = EUR 22,588 (FX 4.25) / 1,840 h
+
+# Company-level anchors (D-COMPANY, 13 Sep; revenue basis fixed in D21).
+# Redeployment is valued on the headcount basis the authors chose: emergent
+# automation-of-touch-time (an OUTPUT of the DES, not the assumed 60%) times the
+# loaded cost of the 16-strong estimator pool. The win-rate and error benefits
+# are valued on COMPANY revenue, which under the branch basis is DERIVED from
+# the as-is anchor (not supplied) - see company_revenue() in economics.py.
+company:
+  n_estimators: 16             # BASE-02
+  loaded_cost_eur: 22588       # AED 96,000 at FX 4.25 (BASE-05)
+  blended_margin: 0.24         # D19 blended gross margin on won work
+
+  # Revenue basis (D21). The AED 150M (~EUR 35.3M) of 2025 pump revenue is the
+  # ABU DHABI BRANCH, not the whole company (authors). The old model treated it
+  # as company revenue and so divided the value bands by ~640/5,500 (the shrink
+  # buried inside the retired value_scale 0.11819 = 0.1288 x 3.9/4.25), spreading
+  # one branch's revenue across the whole company's inquiries. Under the branch
+  # basis the value bands stay at branch scale and company revenue EMERGES from
+  # the DES at company volume (~EUR 300M, derived; used for win-uplift).
+  revenue_basis: branch        # branch | company
+  branch:
+    revenue_eur: 35294118      # AED 150M at FX 4.25 (BASE-42, Abu Dhabi branch)
+    inquiries_per_year: 640    # BASE-14 / D9 (branch pump RFQs)
+  inquiries_per_year: 5500     # company volume (D-COMPANY); used only to
+                               # pro-rate the branch-revenue calibration check
+  value_scale: 1.0193          # D21: calibrated so the as-is anchor reproduces
+                               # the AED 150M branch revenue at branch volume
+                               # (i.e. derived company won value x 640/5,500 =
+                               # branch revenue, within the SIM-3 test's 5%).
+                               # This drops the old 640/5,500 company-spread; it
+                               # is ~1.0 because the value bands already sit near
+                               # EUR@4.25 level (a literal 3.9/4.25 FX rebase
+                               # would UNDER-reproduce branch revenue by ~10%).
+  # Only read when revenue_basis: company. Explicit, not a magic number: it would
+  # be revenue_eur 35294118 (AED 150M @4.25) with value_scale 0.11819, where
+  # 0.11819 = 0.1288 (empirical company-spread ~640/5,500) x 3.9/4.25 (FX rebase).
+  revenue_eur: 35294118
+
+win_rate:                      # BASE-20 (M)
+  tier1: 0.34
+  tier2: 0.27
+  tier3: 0.22
+margin:                        # BASE-21 (E, D19): measured tier pattern
+  tier1: 0.185                 # (14/17/21, M) rescaled x1.323 so the
+  tier2: 0.225                 # won-value-weighted average reproduces the
+  tier3: 0.278                 # authors' stated 24% gross margin on revenue
+
+# NOTE: the business does not offer discounts (author, 13 Sep). There is no
+# discount-leakage pool and no pricing-recovery benefit anywhere in the model,
+# so the former `discounts` block and `pricing_adoption_triangular` lever were
+# removed. Every quote is priced at the like-for-like reference.
+
+error_unit_cost_eur:           # BASE-30 (E, D19): credit-note ledger (EUR,
+  extraction: 845              # before value_scale). These are the AVERAGE cost
+  calculation: 2677            # per defect; the per-quote cost scales with that
+  selection: 11270             # quote's value when error_cost_value_proportional
+  pricing: 4508                # is on (see below).
+calc_site_failure: {probability: 0.10, cost_eur: 35219}  # BASE-30 calc tail
+# quality_cost_target_pct retired per D19: quality cost is anchored to the
+# value-scaled unit costs directly (scale = 1.0 in economics.py).
+error_cost_on_won_only: true   # credit notes exist only on orders; rework on
+                               # lost quotes is inside touch time already
+
+# Value-proportional defect cost (D21). When true, each defect costs
+# unit_cost x (quote value / ref_value) instead of a flat unit cost, so a defect
+# on a large order costs proportionally more. ref_value is the defect-weighted
+# mean quote value in the AS-IS lane (computed in build_anchors), normalised so
+# the AVERAGE as-is cost per defect still equals the BASE-30 ledger units above;
+# the same ref_value is applied to both lanes. Set false to reproduce the old
+# flat-cost behaviour.
+error_cost_value_proportional: true
+
+# Bids lost because a quote carried a defect (D21, new). SEPARATE mechanism from
+# win_uplift_pp below: win_uplift_pp is EXTRA tenders won because QuoteBench
+# quotes faster (a speed gain on the win rate); error_lost_bid is tenders LOST
+# because a quote that would otherwise have won carried a defect (wrong spec or
+# price). They do not overlap - one adds wins from speed, the other removes wins
+# from quality. Cost per lane = sum over defective quotes of
+# value x p_win x tier_margin, times p_loss. Central p_loss = 0.0 (no reliable
+# sales estimate yet), so the line is wired but INERT until the authors supply a
+# figure; the Monte Carlo and tornado sweep [0, central, 2 x central].
+error_lost_bid:
+  p_loss_triangular: [0.0, 0.0, 0.0]
+
+win_uplift_pp:                 # response-time elasticity, 9.3: floored at
+  triangular: [0.00, 0.02, 0.05]  # zero, capped by triangulation (15% of
+                               # tenders lost to late quotes is the upper
+                               # bound; 5pp on a 27% base is ~18% relative,
+                               # inside it). PROVISIONAL pending 9.3.
+
+financial:
+  build_cost_eur: 93000        # existing engineer, year 1 of build (author,
+                               # 13 Sep): EUR 93,000
+  build_overrun_triangular: [1.00, 1.05, 1.30]  # +30% tail per 9.5
+  # Run cost is now itemized: the build engineer moves to a maintenance role at
+  # EUR 60,000/yr PLUS the AWS infrastructure total from parameters_infra.yaml
+  # (priced per service, ~EUR 5.2k/yr). run_cost_yr_triangular is derived in
+  # economics.py as maintenance_engineer_eur + infra x infra_mult_triangular.
+  maintenance_engineer_eur: 60000              # author, 13 Sep
+  infra_mult_triangular: [0.85, 1.00, 1.50]    # uncertainty on the AWS lines
+  change_cost_triangular: [10000, 18000, 30000] # PROVISIONAL: 9.4 (training,
+                               # transition productivity dip)
+  adoption_ramp: [0.3, 0.7, 1.0, 1.0, 1.0]      # benefit ramp Y1-Y5 (author,
+                               # 13 Sep): 30% / 70% / full
+  discount_rate: 0.12          # D11: WACC proxy
+  hurdle_rate: 0.15            # D11: approval hurdle
+  horizon_years: 5
+
+monte_carlo:
+  iterations: 20000
+  anchor_seeds: [101, 102, 103]  # DES runs per variant; MC interpolates
+  anchor_years: 6
+  extraction_weight_triangular: [0.0, 0.5, 1.0]  # where on the published 5.3
+                               # spectrum the documents fall: 0 = pessimistic,
+                               # 0.5 = central, 1 = optimistic; the 8.1 audit
+                               # would narrow this

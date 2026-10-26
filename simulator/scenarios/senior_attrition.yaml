@@ -1,0 +1,22 @@
+name: senior_attrition
+description: "The senior estimators leave and are replaced by mid-level hires
+  (D14 skill profiles): slower touch, higher reviewer-miss rates in both lanes.
+  Company-scale roster is held at 16 people so this isolates the loss of scarce
+  expertise, not a loss of capacity. Tests dependence on scarce expertise."
+estimators:
+  - {name: mid_1, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_2, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_3, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_4, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_5, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_6, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_7, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_8, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_9, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_10, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_11, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_12, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_13, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_14, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_15, skill: mid, speed: 1.13, error_mult: 1.2}
+  - {name: mid_16, skill: mid, speed: 1.13, error_mult: 1.2}

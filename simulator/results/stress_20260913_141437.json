@@ -1,0 +1,99 @@
+{
+  "kind": "stress",
+  "timestamp": "20260913_141437",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "207a86a",
+  "params_checksum": "e7e3aac01fd8",
+  "scenarios": [
+    {
+      "name": "base_central",
+      "benefits_yr": 640872.195599263,
+      "npv12": 1405530.991417496,
+      "npv_hurdle": 1278457.5891487938
+    },
+    {
+      "name": "adoption_failure",
+      "benefits_yr": 547301.6818863193,
+      "npv12": 1149089.9536098486,
+      "npv_hurdle": 1042976.5048680772
+    },
+    {
+      "name": "build_overrun_30",
+      "benefits_yr": 640872.195599263,
+      "npv12": 1382280.991417496,
+      "npv_hurdle": 1255207.5891487938
+    },
+    {
+      "name": "build_overrun_60",
+      "benefits_yr": 640872.195599263,
+      "npv12": 1354380.991417496,
+      "npv_hurdle": 1227307.5891487938
+    },
+    {
+      "name": "demand_collapse",
+      "benefits_yr": 522465.1415191162,
+      "npv12": 1081022.4830511606,
+      "npv_hurdle": 980472.4614106163
+    },
+    {
+      "name": "demand_surge",
+      "benefits_yr": 632818.3486256325,
+      "npv12": 1383458.4731175771,
+      "npv_hurdle": 1258189.146209604
+    },
+    {
+      "name": "elasticity_zero",
+      "benefits_yr": 456072.19559926295,
+      "npv12": 899064.7777955681,
+      "npv_hurdle": 813386.8884729599
+    },
+    {
+      "name": "extraction_pessimistic",
+      "benefits_yr": 492634.3986607597,
+      "npv12": 999267.8110544009,
+      "npv_hurdle": 905399.9263304404
+    },
+    {
+      "name": "senior_attrition",
+      "benefits_yr": 167119.20465508514,
+      "npv12": 107154.99836792162,
+      "npv_hurdle": 86203.0683388324
+    }
+  ],
+  "tornado": {
+    "extraction (5.3 range)": [
+      1022195.1121323734,
+      1696974.687867315
+    ],
+    "win uplift (0-5pp)": [
+      899064.7777955681,
+      2165230.311850388
+    ],
+    "build overrun": [
+      1382280.991417496,
+      1410180.991417496
+    ],
+    "run cost": [
+      1396071.823194618,
+      1408368.7418843596
+    ],
+    "pricing adoption": [
+      1162918.2511022473,
+      1567272.8182943286
+    ],
+    "change cost": [
+      1393530.991417496,
+      1413530.991417496
+    ]
+  },
+  "kill_criteria": {
+    "win_uplift_pp (below)": null,
+    "extraction weight (below)": null,
+    "build multiplier (above)": null,
+    "run cost EUR/yr (above)": null,
+    "pricing adoption (below)": null,
+    "demand multiplier (below)": null
+  },
+  "quality_scale": 1.0
+}

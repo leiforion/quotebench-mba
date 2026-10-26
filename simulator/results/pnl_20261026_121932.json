@@ -1,0 +1,68 @@
+{
+  "kind": "pnl",
+  "timestamp": "20261026_121932",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "no-git",
+  "params_checksum": "53a506e957de",
+  "npv12_p10_p50_p90": [
+    3633467.184542351,
+    6183556.933903923,
+    9218978.034037886
+  ],
+  "p_clears_hurdle": 1.0,
+  "irr_median": 4.168790276022289,
+  "payback_median_years": 0.18843191724227903,
+  "automation_rate": {
+    "pessimistic": 0.3359150154354521,
+    "central": 0.5450437041613682,
+    "optimistic": 0.7023746857550028
+  },
+  "benefit_medians": {
+    "labour_redeploy": 197145.84510876428,
+    "quality_savings": 535509.4817706466,
+    "win_uplift_margin": 1653774.075673258,
+    "error_lost_bid": 0.0
+  },
+  "infra_annual_eur": 4815.92771409024,
+  "infra_by_service_eur": {
+    "Aurora PostgreSQL": 2369.1923688,
+    "OpenSearch (vector)": 1360.1801836799998,
+    "Fargate (web app)": 485.97417504000003,
+    "Textract (OCR, cross-border)": 386.153625,
+    "Bedrock (extraction)": 157.50220186800001,
+    "S3 (documents)": 33.417140625,
+    "DynamoDB (catalogue)": 13.00606627524,
+    "OpenAI (CAD, external)": 7.485439500000001,
+    "Step Functions": 1.9604722500000002,
+    "SES (email)": 0.8554788000000001,
+    "Lambda": 0.20056225199999997,
+    "Cognito (auth)": 0.0
+  },
+  "conservative_case": {
+    "npv_at_12pct": 783091.6834866516,
+    "npv_at_hurdle": 705010.5817634439,
+    "clears": true
+  },
+  "conservative_benefits": {
+    "labour_redeploy": 121402.37389849588,
+    "quality_savings": 300268.4247186594,
+    "win_uplift_margin": 0.0,
+    "error_lost_bid": 0.0
+  },
+  "asis_eng_hours": 24854.202424546744,
+  "tobe_eng_hours": 11307.575871095329,
+  "asis_won_value_eur": 303304949.19368005,
+  "revenue_basis": "branch",
+  "company_revenue_eur": 303304949.19368005,
+  "asis_error_by_tier_eur": {
+    "tier1": 653496.0331000573,
+    "tier2": 647479.296488701,
+    "tier3": 269791.0577626022
+  },
+  "asis_quality_cost_eur": 1608916.8621395307,
+  "tobe_quality_cost_eur": 1074181.3442670319,
+  "run_cost_central_eur": 64815.92771409024,
+  "build_cost_eur": 93000,
+  "benefit_total_eur": 2386429.402552669
+}

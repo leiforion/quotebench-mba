@@ -1,0 +1,5 @@
+name: demand_surge
+description: "Arrivals +40% across all tiers: the branch wins market share or a
+  competitor exits. Tests whether the to-be design absorbs volume the as-is
+  process cannot (as-is utilization goes to ~95%)."
+arrivals_multiplier: 1.4

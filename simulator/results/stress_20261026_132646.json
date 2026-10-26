@@ -1,0 +1,108 @@
+{
+  "kind": "stress",
+  "timestamp": "20261026_132646",
+  "seed": 42,
+  "years": 6,
+  "git_commit": "no-git",
+  "params_checksum": "162bd635627b",
+  "scenarios": [
+    {
+      "name": "base_central",
+      "benefits_yr": 2523342.213626081,
+      "npv12": 6566220.275678269,
+      "npv_hurdle": 6017361.217957021
+    },
+    {
+      "name": "adoption_failure",
+      "benefits_yr": 2504957.2039137417,
+      "npv12": 6515833.986411976,
+      "npv_hurdle": 5971093.202000042
+    },
+    {
+      "name": "build_overrun_30",
+      "benefits_yr": 2523342.213626081,
+      "npv12": 6542970.275678269,
+      "npv_hurdle": 5994111.217957021
+    },
+    {
+      "name": "build_overrun_60",
+      "benefits_yr": 2523342.213626081,
+      "npv12": 6515070.275678269,
+      "npv_hurdle": 5966211.217957021
+    },
+    {
+      "name": "demand_collapse",
+      "benefits_yr": 1561110.7905392232,
+      "npv12": 3929111.479797097,
+      "npv_hurdle": 3595793.890320062
+    },
+    {
+      "name": "demand_surge",
+      "benefits_yr": 3007744.4531625966,
+      "npv12": 7893781.791522647,
+      "npv_hurdle": 7236415.811843334
+    },
+    {
+      "name": "elasticity_zero",
+      "benefits_yr": 1065169.9083497003,
+      "npv12": 2569926.951751391,
+      "npv_hurdle": 2347700.959726595
+    },
+    {
+      "name": "extraction_pessimistic",
+      "benefits_yr": 2296591.4631703864,
+      "npv12": 5944783.078604532,
+      "npv_hurdle": 5446716.572972166
+    },
+    {
+      "name": "multi_office_rollout",
+      "benefits_yr": 2523342.213626081,
+      "npv12": 6416970.275678269,
+      "npv_hurdle": 5868111.217957021
+    },
+    {
+      "name": "senior_attrition",
+      "benefits_yr": 2255038.6230401,
+      "npv12": 5830902.615368474,
+      "npv_hurdle": 5342144.016292171
+    }
+  ],
+  "tornado": {
+    "extraction (5.3 range)": [
+      5877200.357370081,
+      7122489.025222789
+    ],
+    "win uplift (0-5pp)": [
+      2569926.951751391,
+      12560660.261568585
+    ],
+    "build overrun": [
+      6542970.275678269,
+      6570870.275678269
+    ],
+    "run cost": [
+      6557540.104870286,
+      6568824.326920664
+    ],
+    "change cost": [
+      6554220.275678269,
+      6574220.275678269
+    ],
+    "error lost-bid (0-2x)": [
+      6566220.275678269,
+      6566220.275678269
+    ],
+    "fr unflagged miss (.15-.40)": [
+      6496000.509584842,
+      6592980.090277389
+    ]
+  },
+  "kill_criteria": {
+    "win_uplift_pp (below)": null,
+    "extraction weight (below)": null,
+    "build multiplier (above)": null,
+    "run cost EUR/yr (above)": null,
+    "demand multiplier (below)": null
+  },
+  "quality_scale": 1.0
+}

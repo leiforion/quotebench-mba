@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+"""T09 — complete Section 6: Options A-E prose, decision-matrix text, concession.
+The matrix table itself is inserted by t09b_matrix.py.
+Usage: python3 scripts/t09_edits.py [--apply]
+"""
+import sys
+sys.path.insert(0, "scripts")
+from doc_editor import run
+
+EDITS = [
+    {"find": "6.1 Option set \u2014 five genuine alternatives", "replace": "6.1 Option set"},
+
+    # --- Option A: replace bullet with intro + new para; delete old prose ---
+    {"find": "\u2022    A. Status quo + (hire 1\u20132 engineers) \u2014 the honest baseline competitor; cheap, fast, low-risk, doesn\u2019t scale.",
+     "replace": "Five options span the realistic range, from adding headcount to building everything. Each is described on its own terms and scored in 6.2; two of the rejected options survive inside the proposed design as components.\nOption A \u2014 hire more estimators. The honest baseline competitor is not technology at all: keep the process of Section 4 and add one or two estimators as volume grows. Its virtues are real \u2014 lowest cost, fastest to value, no implementation risk, no change management. Its limits are the arithmetic of 2.2: a qualified estimator costs about \u20ac22,000 a year (E), takes two to three months to hire and another three to four to reach full productivity, and adds capacity only in permanent, indivisible steps. Cycle time, error rates and the discount spread stay where Section 4 measured them, because the process itself is unchanged.",
+     "bold": ["Option A \u2014 hire more estimators."]},
+    {"find": "It is the oldest way of quoting pumps, and some distributors still work this way today. The engineer receives the RFQ and reads through the details like drawings, AutoCAD files, schedules, and specifications. It is all done manually to pull out the key details like flow, head, efficiency, material, orientation, and seal type etc. If something is missing, the engineer raises an RFI with the contractor, consultant or the manufacturer. They have to follow up manually with reminders. This can happen at any point in the process, sometimes before the calculations and sometimes during. The engineer then does the head loss calculations by hand. With no selection software, the engineer opens the manufacturer's manuals and pump catalogues, reads the pump curves off the page, and picks the model by hand.\n",
+     "replace": ""},
+    {"find": "For a small number of simple inquiries, it works. But everything is manual, so the output depends entirely on how many engineers are available. It is slow, and it does not scale without hiring more people. Adding people is not easy. As shown in Section 2.2, a qualified estimator costs around \u20ac22,000 a year. It takes two to three months to hire one, and another three to four months before they are fully productive. So even when the business decides to scale, the extra capacity comes slowly and at a real cost. On top of this, the process is prone to errors that can happen at several points, like while reading the files, doing the calculations, and even during matching the curves by hand.\n",
+     "replace": ""},
+
+    # --- Option B ---
+    {"find": "\u2022    B. Manufacturer selection tools (Grundfos, Wilo, KSB, Xylem publish selectors/APIs) \u2014 free pump-curve logic; single-vendor bias, no intake automation.",
+     "replace": "Option B \u2014 manufacturer selection tools. Grundfos, Wilo, KSB and Xylem all publish selection software: the estimator enters a computed duty point and picks from the returned range instead of reading curves off the page. This is how most distributors, Khoory included, already work, so its gains are banked in the Section 4 baseline \u2014 the tools remove roughly 20 to 30 percent of manual effort at the selection step (E, estimator interviews) and make that step more reliable. They cannot reach intake, extraction, calculation or clarification, where the delay and most of the defects live, and each tool ranks only its publisher's range.",
+     "bold": ["Option B \u2014 manufacturer selection tools."]},
+    {"find": "Option B \u2014 Manual Calculation with Manufacturer Selection Software\n", "replace": ""},
+    {"find": "This option works the same way as Option A up to the selection step. The engineer still receives the RFQ, reads through the drawings, AutoCAD files, schedules, and specifications manually. It is all done manually to pull out details like flow, head, efficiency, material, orientation, and seal type etc. RFIs are still raised by hand when information is missing, with manual follow ups. The head loss calculations are still done by hand.\n",
+     "replace": ""},
+    {"find": "The difference comes at the selection step. Instead of opening the manufacturer's manuals and reading the pump curves off the page, the engineer enters the calculated values into the manufacturer's selection software. Companies like Grundfos, Wilo, KSB, and Xylem all publish these tools. The software takes the inputs and returns a range of suitable pump models. The engineer then picks from that range.\n",
+     "replace": ""},
+    {"find": "This is how most distributors work today. The selection software removes around 20 to 30 percent of the manual effort (E, estimator interviews), mainly the curve reading and model matching that used to be done by hand. It also makes the selection more reliable at that step. But the rest of the process is still manual. The intake, the reading, the calculations, and the RFIs are all still done by people. So the same capacity limits and the same chances of error remain across most of the process.\n",
+     "replace": ""},
+
+    # --- Option C ---
+    {"find": "\u2022    C. Off-the-shelf CPQ \u2014 strong on pricing and quote assembly; weak on unstructured intake and hydraulic engineering.",
+     "replace": "Option C \u2014 off-the-shelf CPQ. Configure-price-quote software automates the commercial tail: line-item assembly, pricing rules, discount approvals, document generation. As 5.2 established, the category assumes structured inputs and therefore solves the wrong end of this problem \u2014 it cannot read a specification, run a head-loss calculation or select a pump \u2014 and it addresses only around 10 to 15 percent of the touch time measured in Section 4 (E), at enterprise licence prices. It is rejected as an alternative and retained as a component: the pricing discipline it embodies reappears as the rules-based engine of 7.6.",
+     "bold": ["Option C \u2014 off-the-shelf CPQ."]},
+    {"find": "CPQ stands for Configure, Price, Quote. It is a category of sales software made to automate the commercial side of quoting. It assembles the line items, applies the pricing rules and discounts, handles approvals, and generates a clean quote document. It is good at the pricing and quote assembly end of the process.\n",
+     "replace": ""},
+    {"find": "The problem is that it solves the wrong end for us. CPQ is built for businesses with a smaller product basket, where the sales team already knows what to offer and just needs to put the quotation together. It cannot read an RFQ. It cannot read a specification or an AutoCAD file. It has no way to work out which pumps are required. All of that, the intake, the calculations, and the pump selection, still has to be done manually before CPQ can do anything at all.\n",
+     "replace": ""},
+    {"find": "So an off-the-shelf CPQ tool addresses only around 10 to 15 percent of the touch time measured in Section 4 (E) \u2014 the pricing and quote-assembly tail. It automates the sending of the quotation, but everything before that stays manual. These tools are also expensive to buy off the shelf, which makes little sense when they leave the hardest part of the work untouched. For this reason it is not a real competitor to what we are proposing. The pricing engine idea behind CPQ is useful, and we do carry it into our proposed hybrid model\n",
+     "replace": ""},
+
+    # --- Options D and E ---
+    {"find": "\u2022    D. Full custom AI platform \u2014 maximal capability, maximal cost and risk.",
+     "replace": "Option D \u2014 full custom AI platform. Building everything in-house \u2014 bespoke extraction models, proprietary hydraulic and selection engines, CAD interpretation from day one \u2014 carries the highest capability ceiling and the highest exposure. It duplicates assets the manufacturers already maintain (curve data, selection logic), requires specialist engineering talent the business does not employ, and stakes the schedule on the hardest problems first, against the 5.3 evidence that extraction degrades exactly where this design would need it most. Nothing in the Section 4 baseline requires the ceiling; everything in Section 9 punishes the cost.",
+     "bold": ["Option D \u2014 full custom AI platform."]},
+    {"find": "\u2022    E. Hybrid (proposed): LLM extraction + deterministic calculation engine + manufacturer selection APIs + rules-based pricing + confidence-routed human review.",
+     "replace": "Option E \u2014 the proposed hybrid. QuoteBench assembles proven components under Khoory's own orchestration: foundation-model extraction bought as a commodity, a deterministic in-house calculation engine, the manufacturer selection APIs of Option B repurposed as services, the pricing discipline of Option C rebuilt as rules on Khoory's own data, and confidence-routed human review over all of it (Section 7). Nothing unproven is invented; the claim is in the assembly and the routing. It is the only option that attacks all four root causes of 4.7 at once, and the only one that accumulates a compounding asset while it works \u2014 the transaction data of Section 10.",
+     "bold": ["Option E \u2014 the proposed hybrid."]},
+
+    # --- 6.2 matrix text (table inserted by t09b) ---
+    {"find": "Criteria: cycle-time impact, margin impact, error-rate impact, cost, implementation risk, strategic optionality (data asset). Score honestly \u2014 Option A must win on cost and risk. E\u2019s case rests on scalability and the data asset, with B/C as components of E rather than competitors.",
+     "replace": "Table 6.1 scores the five options against the six criteria the investment decision turns on, ordinally, from 1 (worst) to 5 (best). The criteria are not equally weighted, and the scores are argued rather than averaged.\nOption A wins where a conservative reader looks first: it is the cheapest and the least likely to fail, and an honest matrix says so. What it cannot do is move the operational needles \u2014 cycle time, error rate, discount spread \u2014 because it adds hands to an unchanged process. D and E dominate the impact criteria and separate on cost and risk: D pays a premium to rebuild what can be bought or borrowed, while E's buy-partner-build sourcing (Table 7.1) confines custom work to thin, auditable layers. B and C score as what they are \u2014 useful components mistaken for solutions when deployed alone. The decision therefore reduces to A versus E: certainty and linearity against operational transformation carrying genuine implementation risk. Section 9 prices that trade; 6.3 states the conditions under which A wins it."},
+
+    # --- 6.3 concession ---
+    {"find": "6.3 The concession paragraph", "replace": "6.3 The concession"},
+    {"find": "State plainly what the rejected options do better and under what conditions you would recommend Option A instead (\u201cif RFQ volume were below X per month, hiring dominates\u201d). In an ex-ante paper this paragraph matters even more: it proves the conclusion was not predetermined.",
+     "replace": "What the rejected options do better deserves plain statement. Option A is faster to first value than anything proposed here \u2014 an estimator hired in March is quoting by summer, while Phase 1 of Section 11 is still running in shadow \u2014 and hiring is reversible in a way build spend is not. The arithmetic has a crossover. At the measured tier mix the average inquiry carries about 4.3 touch hours (M, Table 4.2), roughly \u20ac52 of labour at the loaded rate, so below roughly 1,000 pump RFQs a year the touch time a central automation rate could redeploy would not cover the system's amortized build cost (\u20ac92,000, one internal engineer-year) and its running costs (developed in 9.4), and hiring would dominate on cost as well as risk (S, register arithmetic; refined in 9.5). The measured single-branch volume of 640 sits below that line: the case for Option E rests explicitly on multi-branch deployment (9.1) and on the benefits hiring cannot buy at any volume \u2014 error elimination, discount discipline and response speed (9.2). The commitment is conditional in both directions: if the 8.1 audit returns automation rates materially below its central range, or the pilot of 11.1 breaches its kill criteria, Option A is not this paper's fallback but its recommendation."},
+]
+
+if __name__ == "__main__":
+    ok = run(EDITS, apply="--apply" in sys.argv)
+    sys.exit(0 if ok else 1)

@@ -1,0 +1,75 @@
+id,name,value,unit,tag
+GEN-01,FX conversion rate,0.23,EUR per AED,decision
+GEN-02,Product name,QuoteBench,text,decision
+BASE-01,Estimators at study branch,2,persons,M
+BASE-02,Estimators company-wide (UAE),16,persons,M
+BASE-03,Inquiries at study branch 2025,640,inquiries/yr,M
+BASE-04,Inquiries per estimator-week (company),12,inquiries/wk,E
+BASE-05,Estimator fully loaded cost,96000,AED/yr,E
+BASE-06,Loaded hourly rate (estimation+sales),52,AED/h,E
+BASE-07,Hiring lead time,2-3,months,E
+BASE-08,Ramp to full productivity,3-4,months,E
+BASE-09,Tenders lost to late/rushed quotes,15,% of tenders,E
+BASE-10,Tier volume shares (T1/T2/T3),55/33/12,% of inquiries,M
+BASE-11,Tier value shares (T1/T2/T3),12/41/47,% of quoted value,M
+BASE-12,Tier value thresholds,<245k / 245k-2.14M / >2.14M,AED,E
+BASE-13,Tier pump-count bounds,1-2 / 3-12 / >12,pumps,M
+BASE-14,Inquiries per month by tier,29/18/6,inquiries/mo,M
+BASE-15,Median cycle time by tier,18/39/88,working hours,M
+BASE-16,P90 cycle time by tier,34/71/162,working hours,M
+BASE-17,Touch time by tier,2.1/5.5/11.4,hours,M
+BASE-18,Direct cost per quote by tier,109/286/593,AED,E
+BASE-19,Inquiries with >=1 defect by tier,6/11/19,%,E
+BASE-20,Win rate by tier,34/27/22,%,M
+BASE-21,Gross margin on won quotes by tier,18.5/22.5/27.8,%,E
+BASE-22,Queue share of elapsed time,84-87,%,M
+BASE-23,Assignment queue median,14,working hours,M
+BASE-24,Clarification wait median,41,working hours,M
+BASE-25,Pre-clarification elapsed (as-is),22,working hours,M?
+BASE-26,Inquiries needing >=1 clarification,38,%,M
+BASE-27,Tier classification inter-rater agreement,91,%,E
+BASE-28,Error class share of defects (extr/calc/sel/price),41/17/23/19,%,E
+BASE-29,Error class frequency (extr/calc/sel/price),9/3.5/5/4,% of inquiries,E
+BASE-30,Error unit costs (extr/calc/sel/price),3675/11638/49000/19600,AED,E
+BASE-31,Quality cost,0.51,% of revenue,E
+BASE-32,Discount spread on comparable Tier 2 work,4-18,%,M
+BASE-33,Discount leakage,1.9,% of revenue,E
+BASE-34,Total quality + discount leakage,3.1,% of revenue,E
+BASE-35,Innovo scope,75 pumps / 5 applications,count,M
+BASE-36,Innovo touch total,28,hours,M
+BASE-37,Innovo elapsed,7 (quote 2 days past deadline),calendar days,M
+BASE-38,Time-and-motion sample,22,inquiries,M
+BASE-39,Quotation audit sample,120,quotations,E
+BASE-40,Internal interviews count,[n],interviews,E
+BASE-41,Contractor interviews,4-6,interviews,E
+TOBE-01,[A1] Intake classification time,~1,minute,S
+TOBE-02,[A2] Extraction + validation time,~12,minutes,S
+TOBE-03,[A3] Consolidated clarification issued,~13,minutes after receipt,S
+TOBE-04,[A5] Curve-edge flagging behaviour,flag not accept,logic,S
+TOBE-05,[A6] Engineer review queue median,2.5,hours,S
+TOBE-06,[A7] Tier 2 review touch time,~25,minutes,S
+TOBE-07,Feasibility audit sample,25-30,historical RFQs,A
+TOBE-08,Per-field accuracy compounding,0.95^12 = ~54%,illustration,calc
+FIN-01,Quomate subscription price (S/M/L),120000/200000/320000,AED/yr,S
+FIN-02,Quomate setup fee (S/M/L),50000/90000/140000,AED,S
+FIN-03,Annual churn,8,% of active base,S
+FIN-04,New customers per year (total),3/8/14/12/13,customers,S
+FIN-05,Active customers EOY,3/11/25/35/46,customers,S
+FIN-06,Cost of revenue per active customer,32000,AED/yr,S
+FIN-07,Onboarding delivery cost per new customer,18000,AED,S
+FIN-08,MVP build cost (one-time Y1),400000,AED,S
+FIN-09,Discount rate,20,%,S
+FIN-10,5-year NPV of net profit,3736490,AED,S
+FIN-11,Year 5 ARR (subscription only),8640000,AED,S
+FIN-12,Valuation multiples,4/6/8/10,x ARR,S
+FIN-13,Opex total Y1-Y5,450000/1620000/2900000/3880000/4750000,AED/yr,S
+FIN-14,Business-model frame,internal investment case,structural,decision
+SEC6-01,Option A crossover volume (labour-only),1000-1300,pump RFQs/yr,S
+T14-01,Innovo to-be touch (simulated),15 (11-20),hours,S
+BASE-42,Actual 2025 branch pump-only revenue (won),150,M AED,M
+PILOT-01,Phase 1 pilot budget,25000-35000 (central 30000),EUR,S
+SIM5-01,Routing threshold C1 (auto-draft),0.85,min field confidence,S
+SIM5-02,Routing threshold C2 (assisted),0.70,min field confidence,S
+SIM5-03,Value gate V1,55125,EUR,S
+SIM5-04,Discount band halfwidth,0.01,fraction of reference price,S
+FIN-15,Annual run cost,45000-52000-65000,EUR/yr triangular,E

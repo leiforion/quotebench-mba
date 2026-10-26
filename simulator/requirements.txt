@@ -1,0 +1,7 @@
+# Pinned to the versions the published runs were produced with (Python 3.10).
+# D16/D21. run.sh installs these into .venv before fitting, testing and reporting.
+numpy==2.2.6
+simpy==4.1.2
+matplotlib==3.10.9
+pyyaml==6.0.3
+pytest==9.1.1

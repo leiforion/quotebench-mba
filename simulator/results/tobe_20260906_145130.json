@@ -1,0 +1,56 @@
+{
+  "kind": "tobe",
+  "timestamp": "20260906_145130",
+  "seed": 42,
+  "years": 8,
+  "git_commit": "c487b5b",
+  "params_checksum": "2cf9c741cef8",
+  "variant": "central",
+  "summary": {
+    "cycle_median_wh": {
+      "tier1": 1.8889943956751267,
+      "tier2": 8.261706612873922,
+      "tier3": 54.69184132426017
+    },
+    "cycle_p90_wh": {
+      "tier1": 6.986604799898487,
+      "tier2": 35.19103743077224,
+      "tier3": 105.06320823588395
+    },
+    "eng_touch_median_wh": {
+      "tier1": 0.8130177109486308,
+      "tier2": 2.7152662546298014,
+      "tier3": 6.018352294488367
+    },
+    "route_mix": {
+      "tier1": {
+        "auto": 0.222510181414291,
+        "assisted": 0.15920029618659756,
+        "manual": 0.6182895223991114
+      },
+      "tier2": {
+        "auto": 0.0,
+        "assisted": 0.21808510638297873,
+        "manual": 0.7819148936170213
+      },
+      "tier3": {
+        "auto": 0.0,
+        "assisted": 0.0,
+        "manual": 1.0
+      }
+    },
+    "defect_rate": {
+      "extraction": 0.07636655948553055,
+      "calculation": 0.023311897106109324,
+      "selection": 0.03758038585209003,
+      "pricing": 0.03114951768488746
+    },
+    "any_defect_rate": 0.08561093247588425,
+    "review_queue_median_wh": 0.0,
+    "annual_inquiries": 622.0,
+    "busy_wh_per_year": {
+      "senior": 957.20311353409,
+      "mid": 382.2978181888404
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# Written by `python -m sim fit`. External + administrative wait
+# per tier (contractor answers, pricing approval, dispatch
+# batching), calibrated to BASE-15/16. Do not edit by hand.
+residual_queue_median_wh:
+  tier1: 1.24
+  tier2: 15.39
+  tier3: 58.39
+residual_queue_sigma:
+  tier1: 1.234
+  tier2: 0.834
+  tier3: 0.635

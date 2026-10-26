@@ -1,0 +1,123 @@
+# AWS infrastructure cost model for QuoteBench (SIM-7). Every unit price was
+# captured from the AWS Price List API on 2026-09-13 (profile opsmage,
+# `aws pricing get-products`), OnDemand list price, region Middle East (UAE)
+# me-central-1, EXCEPT Textract which is not offered in UAE and is priced in
+# Asia Pacific (Mumbai) ap-south-1 as the nearest cross-border region (author
+# direction: OCR may leave the country when necessary). All prices USD; the
+# model converts to EUR with eur_per_usd below.
+#
+# KEY ARCHITECTURE FINDINGS (flagged for the authors, no Doc edits made):
+#  - Anthropic Claude is NOT available on Bedrock in UAE. The premium models
+#    offered in-region are Amazon Nova 2.0 Pro/Omni and xAI Grok-4.6. The
+#    "Claude Sonnet-class" central choice is therefore served by Nova 2.0 Pro.
+#  - Amazon Textract is NOT in UAE (or Bahrain); pricing uses Mumbai and the
+#    documents leave the country for OCR. Amazon Nova 2.0 Omni is multimodal
+#    and in-region: switching OCR to Nova Omni would keep documents in-country
+#    and remove the Textract line (modelled as an alternative, ocr_mode).
+#  - Amazon OpenSearch Serverless (OCU) is NOT in UAE; only managed clusters
+#    are available, so the vector index is a managed domain.
+
+# 1 EUR = 4.25 AED (author, D-FX). AED is USD-pegged at 3.6725, so
+# 1 EUR = 4.25 / 3.6725 = 1.1572 USD, i.e. eur_per_usd = 3.6725 / 4.25.
+eur_per_usd: 0.86412          # derived from the AED peg; not a free assumption
+
+horizon_years: 5
+inquiries_per_year: 5500      # company-wide, flat (author direction)
+clarification_share: 0.38     # BASE-26: inquiries needing >=1 clarification
+reviewer_support_share: 0.60  # inquiries where the workspace calls the model
+                              # for supporting text / retrieval (assisted+manual)
+
+# ----------------------------------------------------------------------------
+# Extraction / AI layer
+# ----------------------------------------------------------------------------
+bedrock:
+  # central model = Nova 2.0 Pro (premium available in UAE); alternatives kept
+  # for sensitivity. Prices are USD per 1K tokens, MEC1 standard on-demand.
+  models:
+    nova_2_0_pro:   {in_per_1k: 0.00125,  out_per_1k: 0.01002, image_in_per_1k: 0.00125}
+    nova_2_0_omni:  {in_per_1k: 0.00030,  out_per_1k: 0.00250, image_in_per_1k: 0.00030}
+    nova_pro:       {in_per_1k: 0.00080,  out_per_1k: 0.00320, image_in_per_1k: 0.00080}
+    grok_4_6:       {in_per_1k: 0.00220,  out_per_1k: 0.00660, image_in_per_1k: 0.00220}
+    nova_lite:      {in_per_1k: 0.00006,  out_per_1k: 0.00024, image_in_per_1k: 0.00006}
+  model: nova_2_0_pro
+  model_low: nova_lite          # optimistic-cost sensitivity
+  model_high: grok_4_6          # pessimistic-cost sensitivity
+  # tokens per inquiry, blended (extraction + 38% clarification + 60% support)
+  input_tokens_per_inquiry: 10560
+  output_tokens_per_inquiry: 1990
+
+textract:
+  enabled: true                 # false => OCR folded into Bedrock (Nova Omni)
+  region: ap-south-1            # Mumbai (cross-border); not available in UAE
+  price_per_page: 0.065         # AnalyzeDocument Forms+Tables, sync, 0-1M pages
+  ocr_share_of_inquiries: 0.25  # author: rely on OCR only when necessary
+  pages_per_ocr_inquiry: 5
+
+openai_cad:                     # external (non-AWS) CAD reading; documents leave
+  enabled: true                 # the country. GPT-4o-class multimodal.
+  cad_share_of_inquiries: 0.07  # ~ blended cad_dependent share (tobe doc mix)
+  input_tokens_per_call: 5000
+  output_tokens_per_call: 1000
+  in_per_1k: 0.0025             # GPT-4o list (USD/1K); provisional, external
+  out_per_1k: 0.010
+
+# ----------------------------------------------------------------------------
+# Data layer
+# ----------------------------------------------------------------------------
+aurora:                         # Serverless v2 PostgreSQL, UAE
+  acu_price_hr: 0.15            # MEC1-Aurora:ServerlessV2Usage (Standard)
+  avg_acu: 2.0                  # transactions DB for ~5.5k inquiries/yr is small
+  storage_gb: 75
+  storage_price_gb_mo: 0.121    # MEC1-Aurora:StorageUsage
+  io_price_per_million: 0.242   # MEC1-Aurora:StorageIOUsage
+  io_millions_per_year: 20
+
+dynamodb:                       # on-demand, UAE
+  write_per_million: 0.7755     # MEC1-WriteRequestUnits
+  read_per_million: 0.1555      # MEC1-ReadRequestUnits
+  storage_gb: 5
+  storage_price_gb_mo: 0.25     # standard after 25GB free tier
+  writes_per_inquiry: 8
+  reads_per_inquiry: 20
+
+opensearch:                     # managed domain (Serverless not in UAE); vector
+  # option = small (2x t3.medium.search) or prod (2x m6g.large.search)
+  option: small
+  instances:
+    small:  {type: t3.medium.search, price_hr: 0.0858, count: 2}
+    prod:   {type: m6g.large.search, price_hr: 0.1602, count: 2}
+  ebs_gb_per_node: 20
+  ebs_price_gb_mo: 0.1476       # ES:GP3-Storage
+
+s3:
+  storage_price_gb_mo: 0.024    # MEC1-TimedStorage-ByteHrs (General Purpose)
+  mb_per_inquiry: 10
+  retention_years: 7            # versioning + retention lock
+  # accumulating store; the model averages GB-months over the horizon
+
+# ----------------------------------------------------------------------------
+# Orchestration / app / messaging
+# ----------------------------------------------------------------------------
+step_functions:
+  price_per_transition: 0.0000275   # MEC1-StateTransition
+  transitions_per_inquiry: 15
+
+lambda:
+  price_per_gb_second: 0.0000207    # MEC1-Lambda-GB-Second (x86)
+  price_per_request: 0.0000002      # MEC1-Request ($0.20/million)
+  invocations_per_inquiry: 4
+  gb_seconds_per_invocation: 0.5    # ~1GB * 0.5s hydraulic/orchestration
+
+ses:
+  price_per_email: 0.0001           # MEC1-Recipients / inbound receiving
+  emails_per_inquiry: 1.8           # inbound + clarification thread
+
+cognito:
+  monthly_cost: 0.0                 # ~30 users, inside 50k MAU free tier
+
+fargate:                            # web review app (behind Cognito), 24/7
+  vcpu_price_hr: 0.0526             # MEC1-Fargate-vCPU-Hours
+  gb_price_hr: 0.0058              # MEC1-Fargate-GB-Hours
+  tasks: 2                          # small HA pair
+  vcpu_per_task: 0.5
+  gb_per_task: 1.0
